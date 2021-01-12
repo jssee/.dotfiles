@@ -39,8 +39,13 @@ alias c='clear'
 alias path='echo -e ${PATH//:/\\n}'
 alias fpath='echo -e ${FPATH//:/\\n}'
 alias map="xargs -n1"
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias cleanup="fd -t file -H -g \"*DS_store\" -x rm"
+# special `git` command for dotfiles
 alias dg="$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-
 
 # functions
 FPATH="$HOME/.zsh/functions:$FPATH"
