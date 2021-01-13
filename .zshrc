@@ -29,7 +29,7 @@ setopt autolist
 setopt automenu
 setopt alwaystoend
 setopt sharehistory
-setopt appendhistory 
+setopt appendhistory
 setopt histignoredups
 setopt histreduceblanks
 
@@ -68,7 +68,3 @@ fi
 # case-insensitive (all), partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
 	'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-# tab multiplexer configuration: https://github.com/austinjones/tab-rs/
-source "/Users/jesse/Library/Application Support/tab/completion/zsh-history.zsh"
-# end tab configuration
