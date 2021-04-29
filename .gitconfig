@@ -5,15 +5,17 @@
 [alias]
   aliases = config --get-regexp alias
 
-  b = branch
+  b = branch -vv
   bx = branch -d
   bX = branch -D
   branches = branch -a
 
   f = fetch
   p = pull
+  pp = pull --autostash
   a = add
-  e = add --all
+  fp = push --force-with-lease
+  aa = add --all
   c = commit
   d = "!git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
@@ -31,7 +33,7 @@
   tidy = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore
 
 [color]
   ui = auto
