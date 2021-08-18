@@ -17,3 +17,5 @@ tmp/**/*
 /tags
 .tool_versions
 .dotfiles
+.config/nvim/pack/*
+!.config/nvim/pack/.keep
