@@ -1,0 +1,18 @@
+#!/bin/bash
+# act: Alacritty Change Theme
+# a script to change the alacritty colors to a predefined scheme
+
+theme=$1
+
+function main () {
+  if [[ ! -f ~/.config/alacritty/colors.yml ]]; then
+    echo "file ~/.config/alacritty/colors.yml doesn't exist"
+    return
+  fi
+  # sed doesn't like symlinks, get the absolute path
+  config_path=$(realpath ~/.config/alacritty/colors.yml)
+
+  sed -i "" -e "s#^colors: \*.*#colors: *$theme#g" "$config_path"
+}
+
+main "$@"
