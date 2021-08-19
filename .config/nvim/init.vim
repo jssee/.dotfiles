@@ -22,7 +22,7 @@ set foldnestmax=10
 set foldlevelstart=1
 set inccommand=nosplit
 set ignorecase infercase smartcase
-set list
+set list listchars=tab:⁚⁚,space:·,trail:·,extends:→,precedes:←
 set mouse=a
 set nobackup
 set nohlsearch
