@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+function bootstrap() {
+    cd ~ || exit;
+    git clone --separate-git-dir="$HOME/.dotfiles" \
+        https://github.com/jssee/.dotfiles.git tmp_dotfiles
+
+    rsync --recursive --verbose --exclude ".git" \
+        --exclude "README.md" \
+        --no-perms \
+        tmp_dotfiles/ "$HOME/";
+
+    rm -r tmp_dotfiles;
+
+    source "$HOME/.zshrc";
+}
+
+if [ "$1" == "--force" -o "$1" == "-f" ]; then
+    bootstrap;
+else
+    read -rp "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+    echo "";
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        bootstrap;
+        echo "Computer bootstrapped, run `make all` to finish setup."
+    fi;
+fi;
+unset bootstrap;
+# vim: set tabstop=4:softtabstop=4:shiftwidth=4:noexpandtab

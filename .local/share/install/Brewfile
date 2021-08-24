@@ -1,0 +1,43 @@
+tap "homebrew/services"
+tap "nvie/tap"
+
+# utilities
+brew "coreutils"
+brew "fd"
+brew "findutils"
+brew "fzy"
+brew "gnupg"
+brew "jq"
+brew "moreutils"
+brew "openssl"
+brew "renameutils"
+brew "ripgrep"
+brew "tree"
+brew "zsh-completions"
+
+# git tools
+brew "gh"
+brew "git"
+brew "git-revise"
+brew "gitui"
+brew "hub"
+brew "nvie/tap/git-toolbelt"
+
+# coding tools
+brew "neovim"
+brew "openconnect"
+brew "postgresql"
+brew "starship"
+brew "tmux"
+
+# apps
+cask "1password"
+cask "alacritty"
+cask "dash"
+cask "figma"
+cask "hookshot"
+cask "kap"
+cask "ripcord"
+cask "transmission"
+cask "typeface"
+
