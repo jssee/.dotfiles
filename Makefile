@@ -23,7 +23,9 @@ brew:
 asdf:
 	is-executable $@ || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 	. $(HOME)/.asdf/asdf.sh
-	for PKG in $(ASDF_NPM_PACKAGES); do echo $$PKG >> $(HOME)/.default-npm-packages; done
+	if [ ! -f $(HOME)/.default-npm-packages ]; then \
+		for PKG in $(ASDF_NPM_PACKAGES); do echo $$PKG >> $(HOME)/.default-npm-packages; done; \
+	fi;
 	for PLUGIN in $(ASDF_PLUGINS); do asdf plugin add $$PLUGIN https://github.com/asdf-vm/asdf-$$PLUGIN.git; done
 	for PLUGIN in $(ASDF_PLUGINS); do asdf install $$PLUGIN latest; done
 	for PLUGIN in $(ASDF_PLUGINS); do asdf global $$PLUGIN latest; done
