@@ -19,7 +19,7 @@ local sources = {
         },
     },
     b.formatting.stylua,
-    b.diagnostics.eslint,
+    b.diagnostics.eslint_d,
 }
 
 local M = {}
