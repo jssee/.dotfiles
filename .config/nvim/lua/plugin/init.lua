@@ -46,6 +46,10 @@ packer.startup(function(use)
         "rose-pine/neovim",
         as = "rose-pine",
     }
+    use {
+        "hoob3rt/lualine.nvim",
+        config = with_config "lualine",
+    }
 
     -- treesitter
     use {
