@@ -20,8 +20,8 @@ function M.setup()
     nmap { "gR", [[<cmd>Lspsaga rename<CR>]] }
     nmap { "K", [[<cmd>Lspsaga hover_doc<CR>]] }
 
-    nmap {"[e", [[<cmd>Lspsaga diagnostic_jump_prev<CR>]]}
-    nmap {"]e", [[<cmd>Lspsaga diagnostic_jump_next<CR>]]}
+    nmap { "[e", [[<cmd>Lspsaga diagnostic_jump_prev<CR>]] }
+    nmap { "]e", [[<cmd>Lspsaga diagnostic_jump_next<CR>]] }
 
     command {
         "LspDiagLine",
