@@ -2,15 +2,6 @@ SHELL = /bin/bash
 ASDF_PLUGINS := nodejs ruby erlang elixir
 ASDF_NPM_PACKAGES := typescript vscode-langservers-extracted typescript-language-server typescript @fsouza/prettierd eslint_d
 
-.PHONY: bootstrap
-bootstrap:
-	cd ~ || exit
-	git clone --separate-git-dir="$(HOME)/.dotfiles" https://github.com/jssee/.dotfiles.git tmp_dotfiles
-	rsync --recursive --verbose --exclude ".git" --exclude "README.md" --no-perms tmp_dotfiles/ $(HOME)/
-	rm -r tmp_dotfiles
-	source $(HOME)/.zshrc
-	dg s
-
 .PHONY: all
 all: brew asdf macos
 
