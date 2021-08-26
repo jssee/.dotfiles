@@ -12,7 +12,10 @@ bootstrap:
 	dg s
 
 .PHONY: all
-all: brew asdf
+all: brew asdf macos
+
+macos:
+	$(HOME)/.local/share/install/macos
 
 brew:
 	is-executable $@ || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
