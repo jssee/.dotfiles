@@ -33,6 +33,7 @@ end
 
 lspconfig.cssls.setup {}
 lspconfig.html.setup {}
+lspconfig.tailwindcss.setup {}
 require("plugin.lsp.elixir-ls").setup(on_attach)
 require("plugin.lsp.null-ls").setup(on_attach)
 require("plugin.lsp.sumneko").setup(on_attach)
