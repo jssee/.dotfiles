@@ -16,9 +16,12 @@ window:
 
 font:
   normal:
-    family: BlexMono NF
+    family: BlexMono Nerd Font Mono
+    style: Text
+  bold:
+    style: Medium
 
-  size: 14.0
+  size: 12.0
 
   use_thin_strokes: true
 
