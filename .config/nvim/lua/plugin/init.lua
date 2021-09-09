@@ -1,10 +1,8 @@
 vim.cmd [[packadd packer.nvim]]
 local has_packer, packer = pcall(require, "packer")
-local install_path = vim.fn.stdpath "data"
-    .. "/site/pack/packer/opt/packer.nvim"
 
 if not has_packer then
-  return
+    return
 end
 
 -- a helper to make loading configs a bit less verbose
