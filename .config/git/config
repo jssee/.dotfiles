@@ -32,6 +32,9 @@
   # delete merged branches
   tidy = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
+  # open gitui, requires gitui to be installed
+  ui = "!gitui"
+
 [color]
   ui = auto
 
