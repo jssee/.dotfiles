@@ -16,10 +16,7 @@ window:
 
 font:
   normal:
-    family: BlexMono Nerd Font Mono
-    style: Text
-  bold:
-    style: Medium
+    family: Input
 
   size: 12.0
 
