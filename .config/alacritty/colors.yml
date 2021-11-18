@@ -1,4 +1,51 @@
 schemes:
+  substrata: &substrata
+    primary:
+      background: '#191c25'
+      foreground: '#b5b4c9'
+    cursor:
+      text: '#191c25'
+      cursor: '#b5b4c9'
+    normal:
+      black:   '#191c25'
+      red:     '#cf8164'
+      green:   '#76a065'
+      yellow:  '#ab924c'
+      blue:    '#8296b0'
+      magenta: '#a18daf'
+      cyan:    '#659ea2'
+      white:   '#b5b4c9'
+    bright:
+      black:   '#5b5f71'
+      red:     '#fe9f7c'
+      green:   '#92c47e'
+      yellow:  '#d2b45f'
+      blue:    '#a0b9d8'
+      magenta: '#c6aed7'
+      cyan:    '#7dc2c7'
+      white:   '#f0ecfe'
+  one_dark: &one_dark
+    primary:
+      background: '0x282c34'
+      foreground: '0xabb2bf'
+    normal:
+      black:   '0x373c47'
+      red:     '0xbe5046'
+      green:   '0x98c379'
+      yellow:  '0xe5c07b'
+      blue:    '0x61afef'
+      magenta: '0xc678dd'
+      cyan:    '0x56b6c2'
+      white:   '0xabb2bf'
+    bright:
+      black:   '0x373c47'
+      red:     '0xe06c75'
+      green:   '0x98c379'
+      yellow:  '0xd19a66'
+      blue:    '0x61afef'
+      magenta: '0xc678dd'
+      cyan:    '0x56b6c2'
+      white:   '0xabb2bf'
   rose_pine_dawn: &rose_pine_dawn
     primary:
       background: "0xfffaf3"
@@ -203,4 +250,4 @@ schemes:
     indexed_colors:
       - { index: 16, color: "0xff9e64" }
       - { index: 17, color: "0xdb4b4b" }
-colors: *tokyonight
+colors: *substrata
