@@ -33,11 +33,8 @@ packer.startup(function(use)
     -- ui
     use "jssee/vim-cortado"
     use "folke/tokyonight.nvim"
-    use "rrethy/nvim-base16"
-    use {
-        "rose-pine/neovim",
-        as = "rose-pine",
-    }
+    use "tomasiser/vim-code-dark"
+    use "arzg/vim-substrata"
     use {
         "hoob3rt/lualine.nvim",
         config = with_config "lualine",

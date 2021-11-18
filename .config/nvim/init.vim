@@ -4,7 +4,7 @@ filetype plugin indent on
 syntax on
 
 set termguicolors
-colo tokyonight
+colo substrata
 
 set breakindent
 set clipboard=unnamed
@@ -19,7 +19,7 @@ set hidden
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldnestmax=10
-set foldlevelstart=1
+set foldlevelstart=99
 set inccommand=nosplit
 set ignorecase infercase smartcase
 set list listchars=tab:⁚⁚,space:·,trail:·,extends:→,precedes:←
@@ -29,11 +29,12 @@ set nohlsearch
 set noruler
 set noshowcmd noshowmode
 set noswapfile
+set number
 set scrolloff=999
 set shiftround
 set shiftwidth=0
 set shortmess+=c
-set signcolumn=yes
+set signcolumn=number
 set smartindent
 set splitbelow splitright
 set tabstop=2
