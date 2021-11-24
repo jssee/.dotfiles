@@ -23,7 +23,7 @@ packer.startup(function(use)
     use "tpope/vim-unimpaired"
     use "wellle/targets.vim"
     use "jssee/vim-infest"
-    use "elixir-editors/vim-elixir"
+    use "sheerun/vim-polyglot"
 
     -- navigation
     use "justinmk/vim-dirvish"
@@ -33,7 +33,6 @@ packer.startup(function(use)
     -- ui
     use "jssee/vim-cortado"
     use "folke/tokyonight.nvim"
-    use "tomasiser/vim-code-dark"
     use "arzg/vim-substrata"
     use {
         "hoob3rt/lualine.nvim",
