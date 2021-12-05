@@ -10,13 +10,13 @@ local M = {}
 
 M.setup = function(on_attach)
     lspconfig.elixirls.setup {
-        on_attach = function(client, bufnr)
+        on_attach = function(client)
             on_attach(client)
         end,
         cmd = { cmd },
         settings = {
             dialyzerEnabled = false,
-            fetchDeps = false,
+            fetchDeps = true,
         },
     }
 end

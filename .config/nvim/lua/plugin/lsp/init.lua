@@ -24,9 +24,9 @@ lsp.handlers["textDocument/signatureHelp"] = lsp.with(
 
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, popup_opts)
 
-local on_attach = function(client)
+local on_attach = function()
     vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    require("lspkind").init()
+    nmap { "ga", [[<cmd>lua vim.lsp.buf.code_action()<CR>]] }
     nmap { "gq", [[<cmd>lua vim.lsp.buf.formatting()<CR>]] }
     vmap { "gq", [[<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>]] }
 end
@@ -39,5 +39,3 @@ require("plugin.lsp.null-ls").setup(on_attach)
 require("plugin.lsp.sumneko").setup(on_attach)
 require("plugin.lsp.tsserver").setup(on_attach)
 require("plugin.trouble").setup()
-require("plugin.saga").setup()
-require("plugin.completion").setup()

@@ -11,6 +11,15 @@ function M.setup()
         icons = false,
         indent_lines = false,
         auto_close = true,
+        fold_open = "⌄",
+        fold_closed = "›",
+        signs = {
+            error = "❌ ",
+            warning = "🚧 ",
+            information = "💡 ",
+            hint = "🔎 ",
+            other = "💬 ",
+        },
     }
 
     nmap { "gr", [[<cmd>Trouble lsp_references<CR>]] }

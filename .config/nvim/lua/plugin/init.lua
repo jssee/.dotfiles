@@ -35,7 +35,7 @@ packer.startup(function(use)
     use "folke/tokyonight.nvim"
     use "arzg/vim-substrata"
     use {
-        "hoob3rt/lualine.nvim",
+        "nvim-lualine/lualine.nvim",
         config = with_config "lualine",
     }
 
@@ -45,19 +45,25 @@ packer.startup(function(use)
         config = with_config "treesitter",
     }
     use "windwp/nvim-ts-autotag"
+    use "windwp/nvim-autopairs"
 
     --lsp
     use {
         "neovim/nvim-lspconfig",
         config = with_config "lsp",
     }
+    use {
+        "ms-jpq/coq.artifacts",
+        branch = "artifacts",
+    }
+    use {
+        "ms-jpq/coq_nvim",
+        branch = "coq",
+        config = with_config "completion",
+    }
     use "jose-elias-alvarez/null-ls.nvim"
+    use "jose-elias-alvarez/nvim-lsp-ts-utils"
     use "folke/trouble.nvim"
-    use "glepnir/lspsaga.nvim"
-    use "hrsh7th/nvim-compe"
-    use "norcalli/snippets.nvim"
-    use "windwp/nvim-autopairs"
-    use "onsails/lspkind-nvim"
 
     -- misc
     use "nvim-lua/plenary.nvim"

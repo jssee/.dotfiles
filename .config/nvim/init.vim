@@ -4,7 +4,8 @@ filetype plugin indent on
 syntax on
 
 set termguicolors
-colo substrata
+let g:tokyonight_style = "night"
+colo tokyonight
 
 set breakindent
 set clipboard=unnamed
@@ -54,6 +55,7 @@ let &showbreak="↪ "
 let &fillchars='vert: ,fold:·'
 let g:loaded_netrw=1
 let g:loaded_netrwPlugin=1
+let g:coq_settings = { "auto_start": "shut-up" }
 
 if executable('rg')
   set grepprg=rg\ --vimgrep
