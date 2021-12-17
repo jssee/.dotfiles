@@ -1,5 +1,9 @@
-local null_ls = require "null-ls"
+local has_null, null_ls = pcall(require, "null-ls")
 local b = null_ls.builtins
+
+if not has_null then
+    return
+end
 
 local sources = {
     b.formatting.prettierd.with {
@@ -24,11 +28,9 @@ local sources = {
 }
 
 local M = {}
+
 M.setup = function(on_attach)
-    null_ls.config {
-        sources = sources,
-    }
-    require("lspconfig")["null-ls"].setup { on_attach = on_attach }
+    null_ls.setup { sources = sources, on_attach = on_attach }
 end
 
 return M
