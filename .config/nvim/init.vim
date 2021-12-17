@@ -26,7 +26,7 @@ set ignorecase infercase smartcase
 set list listchars=tab:⁚⁚,space:·,trail:·,extends:→,precedes:←
 set mouse=a
 set nobackup
-set nohlsearch
+set hlsearch
 set noruler
 set noshowcmd noshowmode
 set noswapfile

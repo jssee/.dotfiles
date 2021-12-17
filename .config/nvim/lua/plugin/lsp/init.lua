@@ -12,6 +12,7 @@ lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
         underline = true,
         signs = true,
         virtual_text = false,
+        update_in_insert = false
     }
 )
 

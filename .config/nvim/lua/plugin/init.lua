@@ -24,6 +24,7 @@ packer.startup(function(use)
     use "wellle/targets.vim"
     use "jssee/vim-infest"
     use "sheerun/vim-polyglot"
+    use "jssee/vim-delight"
 
     -- navigation
     use "justinmk/vim-dirvish"

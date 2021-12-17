@@ -45,7 +45,7 @@ lualine.setup {
     sections = {
         lualine_a = { "mode" },
         lualine_b = { "filename", "branch" },
-        lualine_c = { { "diagnostics", sources = { "nvim_lsp" } } },
+        lualine_c = { { "diagnostics", sources = { "nvim_diagnostic" } } },
         lualine_x = { "diff" },
         lualine_y = { "filetype", lsp_progress },
         lualine_z = { "location" },
