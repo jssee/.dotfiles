@@ -8,6 +8,7 @@ if [[ -d "$HOME/.zplug" ]]; then
   zplug zsh-users/zsh-syntax-highlighting, defer:3, on:'zsh-users/zsh-autosuggestions'
   zplug zsh-users/zsh-history-substring-search, defer:3, on:"zsh-users/zsh-syntax-highlighting"
   zplug g-plane/zsh-yarn-autocompletions, defer:3, hook-build:'./zplug.zsh'
+  zplug "geometry-zsh/geometry", at:mnml
 
   if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -21,6 +22,17 @@ if [[ -d "$HOME/.zplug" ]]; then
 else
   echo "zplug not installed: https://github.com/zplug/zplug#installation"
 fi
+
+# prompt customization
+GEOMETRY_STATUS_SYMBOL="❱"
+GEOMETRY_STATUS_SYMBOL_ERROR="❱"
+GEOMETRY_STATUS_COLOR="magenta"
+GEOMETRY_PATH_COLOR="cyan"
+GEOMETRY_PROMPT=(geometry_newline geometry_status geometry_path)
+GEOMETRY_RPROMPT+=(geometry_exec_time geometry_echo geometry_node)
+GEOMETRY_GIT_SYMBOL_STASHES="✦"
+GEOMETRY_GIT_SYMBOL_CLEAN="✦"
+GEOMETRY_GIT_SYMBOL_DIRTY="✷"
 
 # options
 setopt nocaseglob
@@ -71,6 +83,6 @@ fi
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
   'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 eval "$(hub alias -s)"
 eval "$(direnv hook zsh)"
