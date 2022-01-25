@@ -24,6 +24,7 @@ brew "hub"
 brew "nvie/tap/git-toolbelt"
 
 # coding tools
+brew "direnv"
 brew "neovim"
 brew "openconnect"
 brew "postgresql"
