@@ -39,6 +39,10 @@ packer.startup(function(use)
         "nvim-lualine/lualine.nvim",
         config = with_config "lualine",
     }
+    use {
+        "sidebar-nvim/sidebar.nvim",
+        config = with_config "sidebar",
+    }
 
     -- treesitter
     use {
