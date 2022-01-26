@@ -8,6 +8,7 @@ end
 nmap {"_", [[<cmd>SidebarNvimToggle<cr>]]}
 
 sidebar.setup {
+    open = true,
     side = "right",
     hide_statusline = true,
     sections = { "git", "files" },
