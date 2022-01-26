@@ -16,7 +16,7 @@ window:
 
 font:
   normal:
-    family: Input
+    family: Liga SFMono Nerd Font
 
   size: 12.0
 
@@ -28,6 +28,11 @@ shell:
     - -l
     - -c
     - "tmux attach || tmux"
+cursor:
+  style:
+    blinking: Always
+  blink_interval: 600
+
 
 alt_send_esc: false
 
