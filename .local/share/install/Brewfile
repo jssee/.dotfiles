@@ -1,8 +1,10 @@
 tap "homebrew/services"
 tap "nvie/tap"
+tap "cormacrelf/tap"
 
 # utilities
 brew "coreutils"
+brew "dark-notify"
 brew "fd"
 brew "findutils"
 brew "fzy"

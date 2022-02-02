@@ -73,4 +73,10 @@ packer.startup(function(use)
     -- misc
     use "nvim-lua/plenary.nvim"
     use "rktjmp/lush.nvim"
+    use {
+        "cormacrelf/dark-notify",
+        config = function()
+            require("dark_notify").run()
+        end,
+    }
 end)

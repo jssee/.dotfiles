@@ -250,7 +250,7 @@ schemes:
     indexed_colors:
       - { index: 16, color: "0xff9e64" }
       - { index: 17, color: "0xdb4b4b" }
-  tokyonight_night: &tokyonight_night
+  dark: &dark
     primary:
       background: '0x1a1b26'
       foreground: '0xc0caf5'
@@ -280,7 +280,7 @@ schemes:
     indexed_colors:
       - { index: 16, color: '0xff9e64' }
       - { index: 17, color: '0xdb4b4b' }
-  tokyonight_day: &tokyonight_day
+  light: &light
     primary:
       background: '0xe1e2e7'
       foreground: '0x3760bf'
@@ -310,4 +310,4 @@ schemes:
     indexed_colors:
       - { index: 16, color: '0xb15c00' }
       - { index: 17, color: '0xc64343' }
-colors: *tokyonight_day
+colors: *light

@@ -1,6 +1,7 @@
 #!/bin/bash
 # act: Alacritty Change Theme
 # a script to change the alacritty colors to a predefined scheme
+# there should be a colorscheme name both "dark" or "light"
 
 theme=$1
 
@@ -9,10 +10,37 @@ function main () {
     echo "file ~/.config/alacritty/colors.yml doesn't exist"
     return
   fi
-  # sed doesn't like symlinks, get the absolute path
-  config_path=$(realpath ~/.config/alacritty/colors.yml)
 
+  config_path=~/.config/alacritty/colors.yml
   sed -i "" -e "s#^colors: \*.*#colors: *$theme#g" "$config_path"
 }
 
 main "$@"
+
+# Add this to a ~/Library/LaunchAgents/com.jh.darknotify.plist
+# make sure to have the nvim plugin too
+# <?xml version="1.0" encoding="UTF-8"?>
+# <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+# <plist version="1.0">
+#   <dict>
+#     <key>Label</key>
+#     <string>com.jh.darknotify</string>
+#     <key>Program</key>
+#     <string>/usr/local/bin/dark-notify</string>
+#     <key>ProgramArguments</key>
+#     <array>
+#       <sting>/Users/jesse/.bin/act</string>
+#       <string>-c</string>
+#       <string>&quot;/Users/jesse/.bin/act&quot;</string>
+#     </array>
+#     <key>KeepAlive</key>
+#     <true/>
+#     <key>StandardErrorPath</key>
+#     <string>/Users/jesse/.cache/darknotify/darknotifyerr.log</string>
+#     <key>StandardOutPath</key>
+#     <string>/dev/null</string>
+#   </dict>
+# </plist>
+
+# finally load it with launchctl
+# launchctl load -w ~/Library/LaunchAgents/com.jh.darknotify.plist
