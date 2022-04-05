@@ -1,6 +1,6 @@
 local has_lspconfig, lspconfig = pcall(require, "lspconfig")
 local has_ts_utils, ts_utils = pcall(require, "nvim-lsp-ts-utils")
-local nmap = require("utils.map").nmap
+local nmap = require("jh.utils.map").nmap
 
 if not has_lspconfig then
     return

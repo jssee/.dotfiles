@@ -58,6 +58,9 @@ end
 function M.vmap(args)
     M.map("v", args)
 end
+function M.xmap(args)
+    M.map("x", args)
+end
 
 function M.imap(args)
     M.map("i", args)
@@ -67,10 +70,14 @@ function M.tmap(args)
     M.map("t", args)
 end
 
+function M.cmap(args)
+    M.map("c", args)
+end
+
 function M.setup()
     for key, val in pairs(M) do
         if key ~= "map" then
-            _G[key] = val
+            My[key] = val
         end
     end
 end

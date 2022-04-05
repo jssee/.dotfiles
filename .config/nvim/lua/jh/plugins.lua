@@ -7,7 +7,7 @@ end
 
 -- a helper to make loading configs a bit less verbose
 local with_config = function(name)
-    return string.format("require('plugin.%s')", name)
+    return string.format("require('jh.%s')", name)
 end
 
 packer.startup(function(use)
@@ -15,26 +15,25 @@ packer.startup(function(use)
     use { "wbthomason/packer.nvim", opt = true }
 
     -- editing
+    use "jssee/vim-delight"
+    use "jssee/vim-infest"
     use "machakann/vim-sandwich"
+    use "sheerun/vim-polyglot"
     use "tpope/vim-commentary"
     use "tpope/vim-eunuch"
     use "tpope/vim-fugitive"
     use "tpope/vim-repeat"
     use "tpope/vim-unimpaired"
     use "wellle/targets.vim"
-    use "jssee/vim-infest"
-    use "sheerun/vim-polyglot"
-    use "jssee/vim-delight"
 
     -- navigation
+    use "gelguy/wilder.nvim"
     use "justinmk/vim-dirvish"
     use "romainl/vim-qf"
-    use "gelguy/wilder.nvim"
 
     -- ui
-    use "jssee/vim-cortado"
     use "folke/tokyonight.nvim"
-    use "arzg/vim-substrata"
+    use "lambdalisue/nerdfont.vim"
     use {
         "nvim-lualine/lualine.nvim",
         config = with_config "lualine",

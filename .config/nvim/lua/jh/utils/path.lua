@@ -32,7 +32,7 @@ local function setPath()
 end
 
 -- Start job
-function P.Path()
+function P.setup()
     local stdout = loop.new_pipe(false)
     local stderr = loop.new_pipe(false)
     handle =

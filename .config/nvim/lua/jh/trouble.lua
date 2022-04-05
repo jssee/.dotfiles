@@ -1,5 +1,6 @@
 local has_trouble, trouble = pcall(require, "trouble")
-local nmap = require("utils.map").nmap
+local u = require "jh.utils.map"
+
 local M = {}
 
 function M.setup()
@@ -22,10 +23,10 @@ function M.setup()
         },
     }
 
-    nmap { "gr", [[<cmd>Trouble lsp_references<CR>]] }
-    nmap { "gd", [[<cmd>Trouble lsp_definitions<CR>]] }
-    nmap { "gi", [[<cmd>Trouble lsp_implementations<CR>]] }
-    nmap { "<leader>t", [[<cmd>TroubleToggle<CR>]] }
+    u.nmap { "gr", [[<cmd>Trouble lsp_references<CR>]] }
+    u.nmap { "gd", [[<cmd>Trouble lsp_definitions<CR>]] }
+    u.nmap { "gi", [[<cmd>Trouble lsp_implementations<CR>]] }
+    u.nmap { "<leader>t", [[<cmd>TroubleToggle<CR>]] }
 
     trouble.setup(config)
 end
