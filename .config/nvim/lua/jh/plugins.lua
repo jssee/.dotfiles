@@ -1,3 +1,13 @@
+-- install packer.nvim if its not already available
+local install_path = vim.fn.stdpath "data"
+    .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.execute(
+        "!git clone https://github.com/wbthomason/packer.nvim " .. install_path
+    )
+end
+
+-- load it
 vim.cmd [[packadd packer.nvim]]
 local has_packer, packer = pcall(require, "packer")
 
@@ -5,10 +15,12 @@ if not has_packer then
     return
 end
 
--- a helper to make loading configs a bit less verbose
-local with_config = function(name)
-    return string.format("require('jh.%s')", name)
-end
+local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+    command = "source <afile> | PackerCompile",
+    group = packer_group,
+    pattern = vim.fn.stdpath "config" .. "lua/jh/plugins.lua",
+})
 
 packer.startup(function(use)
     -- plugin manager
@@ -27,34 +39,31 @@ packer.startup(function(use)
     use "wellle/targets.vim"
 
     -- navigation
-    use "gelguy/wilder.nvim"
+    use {
+        "gelguy/wilder.nvim",
+        config = function()
+            require "jh.wilder"
+        end,
+    }
     use "justinmk/vim-dirvish"
     use "romainl/vim-qf"
 
     -- ui
     use "folke/tokyonight.nvim"
-    use "lambdalisue/nerdfont.vim"
+    use "ryanoasis/vim-devicons"
     use {
         "nvim-lualine/lualine.nvim",
-        config = with_config "lualine",
+        config = function()
+            require "jh.lualine"
+        end,
     }
-    use {
-        "sidebar-nvim/sidebar.nvim",
-        config = with_config "sidebar",
-    }
-
-    -- treesitter
-    use {
-        "nvim-treesitter/nvim-treesitter",
-        config = with_config "treesitter",
-    }
-    use "windwp/nvim-ts-autotag"
-    use "windwp/nvim-autopairs"
 
     --lsp
     use {
         "neovim/nvim-lspconfig",
-        config = with_config "lsp",
+        config = function()
+            require "jh.lsp"
+        end,
     }
     use {
         "ms-jpq/coq.artifacts",
@@ -63,8 +72,11 @@ packer.startup(function(use)
     use {
         "ms-jpq/coq_nvim",
         branch = "coq",
-        config = with_config "completion",
+        config = function()
+            require "jh.completion"
+        end,
     }
+    use "steelsojka/pears.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
     use "folke/trouble.nvim"

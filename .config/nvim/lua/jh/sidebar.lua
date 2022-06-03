@@ -1,11 +1,10 @@
 local has_sidebar, sidebar = pcall(require, "sidebar-nvim")
-local u = require "jh.utils.map"
 
 if not has_sidebar then
     return
 end
 
-u.nmap { "_", [[<cmd>SidebarNvimToggle<cr>]] }
+My.nmap { "_", [[<cmd>SidebarNvimToggle<cr>]] }
 
 sidebar.setup {
     open = true,

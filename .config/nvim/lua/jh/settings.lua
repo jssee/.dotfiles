@@ -24,6 +24,7 @@ o.foldnestmax = 10
 o.hidden = true
 o.ignorecase = true
 o.infercase = true
+o.laststatus = 3
 o.list = true
 o.listchars = {
     tab = "⁚⁚",

@@ -1,34 +1,32 @@
-local u = require "jh.utils.map"
+My.nmap { ";", ":" }
+My.xmap { ";", ":" }
+My.nmap { ":", ";" }
+My.imap { "kj", "<esc>" }
+My.cmap { "kj", "<esc>" }
 
-u.nmap { ";", ":" }
-u.xmap { ";", ":" }
-u.nmap { ":", ";" }
-u.imap { "kj", "<esc>" }
-u.cmap { "kj", "<esc>" }
+My.nmap { "j", [[gj]] }
+My.nmap { "k", [[gk]] }
+My.nmap { "n", [[nzvzz]] }
+My.nmap { "N", [[Nzvzz]] }
+My.nmap { "*", [[*zvzzN]] }
+My.nmap { "0", [[^]] }
+My.nmap { "^", [[0]] }
 
-u.nmap { "j", [[gj]] }
-u.nmap { "k", [[gk]] }
-u.nmap { "n", [[nzvzz]] }
-u.nmap { "N", [[Nzvzz]] }
-u.nmap { "*", [[*zvzzN]] }
-u.nmap { "0", [[^]] }
-u.nmap { "^", [[0]] }
+My.nmap { "<BS>", [[<C-^>]] }
+My.nmap { "<Tab>", [[:bn<CR>]] }
+My.nmap { "<S-Tab>", [[<:bp<CR>]] }
 
-u.nmap { "<BS>", [[<C-^>]] }
-u.nmap { "<Tab>", [[:bn<CR>]] }
-u.nmap { "<S-Tab>", [[<:bp<CR>]] }
+My.nmap { "<C-h>", [[:wincmd h<CR>]] }
+My.nmap { "<C-j>", [[:wincmd j<CR>]] }
+My.nmap { "<C-k>", [[:wincmd k<CR>]] }
+My.nmap { "<C-l>", [[:wincmd l<CR>]] }
 
-u.nmap { "<C-h>", [[:wincmd h<CR>]] }
-u.nmap { "<C-j>", [[:wincmd j<CR>]] }
-u.nmap { "<C-k>", [[:wincmd k<CR>]] }
-u.nmap { "<C-l>", [[:wincmd l<CR>]] }
+My.nmap { "<Leader>/", [[:Grep<space>]] }
+My.nmap { "<Leader>*", [[:Grep <C-R>=expand("<cword>")<CR><CR>]] }
 
-u.nmap { "<Leader>/", [[:Grep<space>]] }
-u.nmap { "<Leader>*", [[:Grep <C-R>=expand("<cword>")<CR><CR>]] }
+My.nmap { "<Leader>.", [[:lua require("ido").module.run("files/search")<cr>]] }
 
-u.nmap { "<Leader>.", [[:lua require("ido").module.run("files/search")<cr>]] }
+My.nmap { "<Leader><Space>", [[:e<Space>]] }
 
-u.nmap { "<Leader><Space>", [[:e<Space>]] }
-
-u.nmap { "so", [[:set opfunc=fun#sortop<cr>g@]] }
-u.nmap { "su", [[m':set opfunc=fun#subop<CR>g@]] }
+My.nmap { "so", [[:set opfunc=fun#sortop<cr>g@]] }
+My.nmap { "su", [[m':set opfunc=fun#subop<CR>g@]] }

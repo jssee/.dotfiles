@@ -1,6 +1,5 @@
 local has_lspconfig, lspconfig = pcall(require, "lspconfig")
 local has_ts_utils, ts_utils = pcall(require, "nvim-lsp-ts-utils")
-local nmap = require("jh.utils.map").nmap
 
 if not has_lspconfig then
     return
@@ -26,8 +25,8 @@ M.setup = function(on_attach)
             if has_ts_utils then
                 ts_utils.setup(ts_utils_settings)
                 ts_utils.setup_client(client)
-                nmap { "gs", [[:TSLspOrganize<CR>]] }
-                nmap { "qq", [[:TSLspFixCurrent<CR>]] }
+                My.nmap { "gs", [[:TSLspOrganize<CR>]] }
+                My.nmap { "qq", [[:TSLspFixCurrent<CR>]] }
             end
         end,
         flags = {
