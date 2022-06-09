@@ -1,6 +1,6 @@
 set fish_greeting
 
-set -x EDITOR nvim
+set -gx EDITOR nvim
 
 alias l "ls -laG"
 alias dg "$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
@@ -26,5 +26,12 @@ if status is-interactive
     end
 end
 
-eval "$(hub alias -s)"
-eval "$(direnv hook fish)"
+if type -q hub
+    eval (hub alias -s)
+end
+
+if type -q direnv
+    direnv hook fish | source
+end
+
+stty echo

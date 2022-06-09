@@ -1,8 +1,8 @@
-function g --wraps git
-    switch $argv
+function g --wraps git --argument-names cmd
+    switch $cmd
         case ""
             git status --short --branch
         case \*
-            git $argv
+            git $cmd
     end
 end
