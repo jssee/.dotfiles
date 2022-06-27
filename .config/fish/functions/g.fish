@@ -3,6 +3,6 @@ function g --wraps git --argument-names cmd
         case ""
             git status --short --branch
         case \*
-            git $cmd
+            git $argv[1..-1]
     end
 end

@@ -24,14 +24,12 @@ if status is-interactive
         curl -sLo $HOME/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
         fisher
     end
-end
 
-if type -q hub
-    eval (hub alias -s)
-end
+    if type -q hub
+        eval (hub alias -s)
+    end
 
-if type -q direnv
-    direnv hook fish | source
+    if type -q direnv
+        direnv hook fish | source
+    end
 end
-
-stty echo
