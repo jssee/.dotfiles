@@ -32,4 +32,8 @@ if status is-interactive
     if type -q direnv
         direnv hook fish | source
     end
+
+    set hydro_color_git magenta
+    set hydro_color_duration yellow
+    set hydro_symbol_git_dirty ✦
 end
