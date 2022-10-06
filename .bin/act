@@ -10,7 +10,7 @@ function main () {
     echo "file ~/.config/alacritty/colors.yml doesn't exist"
     return
   fi
-
+  /usr/local/bin/kitty +kitten themes --reload-in=all "zenbones_$(echo $theme)"
   config_path=~/.config/alacritty/colors.yml
   sed -i "" -e "s#^colors: \*.*#colors: *$theme#g" "$config_path"
 }
