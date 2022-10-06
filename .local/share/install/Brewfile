@@ -27,6 +27,7 @@ brew "hub"
 brew "nvie/tap/git-toolbelt"
 
 # coding tools
+brew "difftastic"
 brew "direnv"
 brew "neovim"
 brew "openconnect"
