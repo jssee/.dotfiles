@@ -8,7 +8,7 @@ alias show "defaults write com.apple.finder AppleShowAllFiles -bool true && kill
 alias hide "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 alias hidedesktop "defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-alias cleanup "fd -t file -H -g \"*DS_Store\" -x rm"
+alias cleanup "fd -t file -HI -g \"*DS_Store\" -x rm"
 
 if status is-interactive
     # source asdf
