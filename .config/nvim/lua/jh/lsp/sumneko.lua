@@ -1,7 +1,7 @@
 local has_lspconfig, lspconfig = pcall(require, "lspconfig")
 local root = vim.fn.stdpath "cache"
     .. "/lspconfig/sumneko_lua/lua-language-server/"
-local binary = root .. "bin/lua-language-server"
+local binary = root .. "bin/macOS/lua-language-server"
 
 if not has_lspconfig then
     return
