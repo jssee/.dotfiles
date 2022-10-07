@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 packer.startup(function(use)
     -- plugin manager
-    use { "wbthomason/packer.nvim", opt = true }
+    use { "wbthomason/packer.nvim" }
 
     -- editing
     use "jssee/vim-delight"
@@ -58,9 +58,9 @@ packer.startup(function(use)
     use "folke/tokyonight.nvim"
     use "ryanoasis/vim-devicons"
     use {
-        "nvim-lualine/lualine.nvim",
+        "strash/everybody-wants-that-line.nvim",
         config = function()
-            require "jh.lualine"
+            require("everybody-wants-that-line").setup()
         end,
     }
 
