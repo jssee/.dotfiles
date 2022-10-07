@@ -11,8 +11,8 @@ function M.map(mode, args)
         return
     end
 
-    if args.noremap == nil then
-        args.noremap = true
+    if args.remap == nil then
+        args.remap = false
     end
 
     if args.buffer == nil then
@@ -35,7 +35,7 @@ function M.map(mode, args)
         )
     end
 
-    local f = vim.api.nvim_set_keymap
+    local f = vim.keymap.set
 
     if args.buffer then
         f = function(...)
@@ -47,7 +47,7 @@ function M.map(mode, args)
         mode,
         lhs,
         rhs,
-        { noremap = args.noremap, silent = args.silent, expr = args.expr }
+        { remap = args.remap, silent = args.silent, expr = args.expr }
     )
 end
 
