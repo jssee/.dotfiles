@@ -47,6 +47,12 @@ packer.startup(function(use)
     }
     use "justinmk/vim-dirvish"
     use "romainl/vim-qf"
+    use {
+        "ggandor/leap.nvim",
+        config = function()
+            require("jh.leap").setup()
+        end,
+    }
 
     -- ui
     use "folke/tokyonight.nvim"
