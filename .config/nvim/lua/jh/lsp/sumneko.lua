@@ -31,7 +31,7 @@ M.setup = function(on_attach)
     lspconfig.sumneko_lua.setup {
         on_attach = function(client, bufnr)
             -- we are using null-ls + stylua for formatting
-            client.resolved_capabilities.document_formatting = false
+            client.server_capabilities.document_formatting = false
             on_attach(client)
         end,
         cmd = { binary, "-E", root .. "main.lua" },

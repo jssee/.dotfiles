@@ -29,12 +29,16 @@ local on_attach = function()
 
     My.nmap { "ga", [[<cmd>lua vim.lsp.buf.code_action()<CR>]] }
     My.vmap { "ga", [[<cmd>lua vim.lsp.buf.range_code_action()<CR>]] }
-    My.nmap { "gq", [[<cmd>lua vim.lsp.buf.formatting()<CR>]] }
+    My.nmap { "gq", [[<cmd>lua vim.lsp.buf.format({ async = true })<CR>]] }
     My.vmap { "gq", [[<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>]] }
 
     My.nmap { "gd", [[<cmd>lua vim.lsp.buf.definition()<CR>]] }
     My.nmap { "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]] }
     My.nmap { "gR", [[<cmd>lua vim.lsp.buf.rename()<CR>]] }
+
+    augroup("format_lsp", {
+        [[BufWritePre * silent! lua vim.lsp.buf.format()]],
+    })
 
     require("jh.trouble").setup()
 end
