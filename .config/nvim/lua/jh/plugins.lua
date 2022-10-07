@@ -65,6 +65,9 @@ packer.startup(function(use)
     }
 
     --lsp
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+
     use {
         "neovim/nvim-lspconfig",
         config = function()

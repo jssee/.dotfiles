@@ -1,26 +1,36 @@
 local has_lspconfig, lspconfig = pcall(require, "lspconfig")
 local lsp = vim.lsp
+local mason = require "mason"
+local mason_lspconfig = require "mason-lspconfig"
+local augroup = require "jh.utils.augroup"
 
 if not has_lspconfig then
     return
 end
 
-lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
-    lsp.diagnostic.on_publish_diagnostics,
-    {
+mason.setup {
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+        },
+    },
+}
+mason_lspconfig.setup()
+
+lsp.handlers["textDocument/publishDiagnostics"] =
+    lsp.with(lsp.diagnostic.on_publish_diagnostics, {
         underline = true,
         signs = true,
         virtual_text = false,
         update_in_insert = false,
-    }
-)
+    })
 
 local popup_opts = { border = "single", focusable = false }
 
-lsp.handlers["textDocument/signatureHelp"] = lsp.with(
-    lsp.handlers.signature_help,
-    popup_opts
-)
+lsp.handlers["textDocument/signatureHelp"] =
+    lsp.with(lsp.handlers.signature_help, popup_opts)
 
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, popup_opts)
 
