@@ -36,6 +36,11 @@
   # open gitui, requires gitui to be installed
   ui = "!gitui"
 
+  # rebasing flow
+  r = "!r() { git fetch origin main; git rebase origin/main -i --autostash; }; r"
+  n = "!n() { git add --all; git rebase --continue; }; n"
+  x = rebase --abort
+
 [color]
   ui = auto
 
