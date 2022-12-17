@@ -55,6 +55,7 @@ packer.startup(function(use)
     }
 
     -- ui
+    use "sainnhe/gruvbox-material"
     use "folke/tokyonight.nvim"
     use "ryanoasis/vim-devicons"
     use {
@@ -74,6 +75,7 @@ packer.startup(function(use)
             require "jh.lsp"
         end,
     }
+
     use {
         "ms-jpq/coq.artifacts",
         branch = "artifacts",

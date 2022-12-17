@@ -7,8 +7,8 @@ end
 local M = {}
 
 function M.setup()
-    My.nmap { "f", "<Plug>(leap-forward)", remap = true }
-    My.nmap { "F", "<Plug>(leap-backward)", remap = true }
+    My.nmap { "<cr>", "<Plug>(leap-forward)", remap = true }
+    My.nmap { "<s-cr>", "<Plug>(leap-backward)", remap = true }
     My.nmap { "#", "<Plug>(leap-cross-window)", remap = true }
 end
 

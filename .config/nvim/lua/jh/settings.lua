@@ -6,8 +6,8 @@ cmd [[ syntax on ]]
 
 -- colorscheme
 o.termguicolors = true
-g.tokyonight_style = "night"
-cmd [[ colo tokyonight ]]
+g.gruvbox_material_background = "hard"
+cmd [[ colo gruvbox-material ]]
 
 -- options
 o.backup = false
@@ -15,6 +15,7 @@ o.breakindent = true
 o.clipboard:append "unnamedplus"
 o.completeopt = { "menuone", "noselect" }
 o.copyindent = true
+o.cmdheight = 0
 o.cursorline = true
 o.expandtab = true
 o.foldexpr = "nvim_treesitter#foldexpr()"
