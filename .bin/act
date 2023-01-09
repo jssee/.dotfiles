@@ -1,44 +1,49 @@
 #!/bin/bash
-# act: Alacritty Change Theme
 # a script to change the alacritty colors to a predefined scheme
 # there should be a colorscheme name both "dark" or "light"
 
+# this arg is coming from the dark-notify program
+# `brew install dark-notify`
 theme=$1
 
+# things installed with brew have diffferent install locations so we need to
+# capture that here...
+kitty_cmd=$(command -v kitty)
+
 function main () {
-  if [[ ! -f ~/.config/alacritty/colors.yml ]]; then
-    echo "file ~/.config/alacritty/colors.yml doesn't exist"
-    return
+  kitty_cmd=$(command -v kitty)
+  # use kitty's built in theme changer
+  if [ $theme == "dark" ]; then
+    $kitty_cmd "+kitten" themes --reload-in=all "$(echo $SHELL_THEME_DARK)"
+  else
+    $kitty_cmd "+kitten" themes --reload-in=all "$(echo $SHELL_THEME_LIGHT)"
   fi
-  /usr/local/bin/kitty +kitten themes --reload-in=all "zenbones_$(echo $theme)"
-  config_path=~/.config/alacritty/colors.yml
-  sed -i "" -e "s#^colors: \*.*#colors: *$theme#g" "$config_path"
 }
 
 main "$@"
 
-# Add this to a ~/Library/LaunchAgents/com.jh.darknotify.plist
-# make sure to have the nvim plugin too
+# create a propertylist to run in the background
+# ...make sure to have the nvim plugin too
+# touch ~/Library/LaunchAgents/com.jh.darknotify.plist
+#
 # <?xml version="1.0" encoding="UTF-8"?>
 # <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 # <plist version="1.0">
 #   <dict>
 #     <key>Label</key>
 #     <string>com.jh.darknotify</string>
-#     <key>Program</key>
-#     <string>/usr/local/bin/dark-notify</string>
-#     <key>ProgramArguments</key>
-#     <array>
-#       <sting>/Users/jesse/.bin/act</string>
-#       <string>-c</string>
-#       <string>&quot;/Users/jesse/.bin/act&quot;</string>
-#     </array>
 #     <key>KeepAlive</key>
 #     <true/>
 #     <key>StandardErrorPath</key>
-#     <string>/Users/jesse/.cache/darknotify/darknotifyerr.log</string>
+#     <string>/Users/jesse/.cache/darknotify/.dark-mode-notify-stderr.log</string>
 #     <key>StandardOutPath</key>
-#     <string>/dev/null</string>
+#     <string>/Users/jesse/.cache/darknotify/.dark-mode-notify-stdout.log</string>
+#     <key>ProgramArguments</key>
+#     <array>
+#       <string>/usr/local/bin/dark-notify</string>
+#       <string>-c</string>
+#       <string>&quot;/Users/jesse/.bin/act&quot;</string>
+#     </array>
 #   </dict>
 # </plist>
 

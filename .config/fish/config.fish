@@ -35,5 +35,5 @@ if status is-interactive
 
     set hydro_color_git magenta
     set hydro_color_duration yellow
-    set hydro_symbol_git_dirty ✦
+    # set hydro_symbol_git_dirty ✦
 end
