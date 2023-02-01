@@ -17,7 +17,7 @@ for _, m in ipairs {
     -- { "n", "<c-l>", [[:wincmd l<cr>]] },
     { "n", "<leader><space>", [[:edit<space>]] },
     { "n", "<leader>g", [[:Rg<space>]] },
-    { "n", "<leader>gw", [[:Rg <C-R>=expand("<cword>"}<CR><CR>]] },
+    { "n", "<leader>gw", [[:Rg <C-R>=expand("<cword>")<CR><CR>]] },
 } do
     local mode, lhs, rhs = m[1], m[2], m[3]
     vim.keymap.set(mode, lhs, rhs)
