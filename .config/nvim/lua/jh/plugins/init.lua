@@ -9,10 +9,21 @@ return {
     "wellle/targets.vim",
     {
         "steelsojka/pears.nvim",
-        config = true,
+        config = function()
+            require("pears").setup(function(conf)
+                conf.preset "tag_matching"
+            end)
+        end,
     },
     {
         "strash/everybody-wants-that-line.nvim",
         config = true,
+    },
+    {
+        "sainnhe/gruvbox-material",
+        init = function()
+            vim.g.gruvbox_material_background = "hard"
+            vim.cmd [[colo gruvbox-material]]
+        end,
     },
 }

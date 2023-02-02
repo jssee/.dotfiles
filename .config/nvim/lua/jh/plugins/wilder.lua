@@ -1,6 +1,6 @@
 return {
     "gelguy/wilder.nvim",
-    config = {
+    opts = {
         modes = { ":", "/", "?" },
         enable_cmdline_enter = 1,
     },
@@ -22,22 +22,22 @@ return {
         end)
 
         local popupmenu_renderer =
-            wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
-                border = "rounded",
-                empty_message = wilder.popupmenu_empty_message_with_spinner(),
-                highlighter = wilder.basic_highlighter(),
-                left = {
-                    wilder.popupmenu_buffer_flags {
-                        flags = " a + ",
-                        icons = {
-                            ["+"] = "M",
-                            a = " ",
-                            h = " ",
-                        },
+        wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
+            border = "rounded",
+            empty_message = wilder.popupmenu_empty_message_with_spinner(),
+            highlighter = wilder.basic_highlighter(),
+            left = {
+                wilder.popupmenu_buffer_flags {
+                    flags = " a + ",
+                    icons = {
+                        ["+"] = "M",
+                        a = " ",
+                        h = " ",
                     },
                 },
-                right = { " " },
-            })
+            },
+            right = { " " },
+        })
 
         local wildmenu_renderer = wilder.wildmenu_renderer {
             highlighter = wilder.basic_highlighter(),

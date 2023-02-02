@@ -1,6 +1,6 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    config = {
+    opts = {
         disable_netrw = true,
         view = {
             side = "right",

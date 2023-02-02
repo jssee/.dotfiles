@@ -21,5 +21,6 @@ return {
         -- <Plug>(qf_loc_next)
         vim.keymap.set("n", "<c-n>", [[<Plug>(qf_qf_next)]])
         vim.keymap.set("n", "<c-p>", [[<Plug>(qf_qf_previous)]])
+        vim.keymap.set("n", [[\]], [[<Plug>(qf_qf_toggle_stay)]])
     end,
 }

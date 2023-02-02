@@ -10,9 +10,10 @@ for o, v in pairs {
     ignorecase = true,
     infercase = true,
     laststatus = 3,
+    list = true,
     listchars = {
         tab = "⁚⁚",
-        space = "·",
+        -- space = "·",
         trail = "·",
         extends = "→",
         precedes = "←",

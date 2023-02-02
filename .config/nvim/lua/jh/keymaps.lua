@@ -10,6 +10,7 @@ for _, m in ipairs {
     { "n", "*", [[*zvzzN]] },
     { "n", "<tab>", [[:bn<cr>]] },
     { "n", "<s-tab>", [[:bp<cr>]] },
+    { "n", "<backspace>", [[^]] },
     { "n", "q", "<nop>" },
     -- { "n", "<c-h>", [[:wincmd h<cr>]] },
     -- { "n", "<c-j>", [[:wincmd j<cr>]] },
