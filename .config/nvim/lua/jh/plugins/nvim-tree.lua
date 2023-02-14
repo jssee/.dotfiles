@@ -1,5 +1,8 @@
 return {
     "nvim-tree/nvim-tree.lua",
+    dependencies = {
+        { "nvim-tree/nvim-web-devicons" },
+    },
     opts = {
         disable_netrw = true,
         view = {
@@ -8,16 +11,6 @@ return {
         actions = {
             open_file = {
                 quit_on_open = true,
-            },
-        },
-        renderer = {
-            icons = {
-                show = {
-                    file = false,
-                    folder = false,
-                    folder_arrow = false,
-                    git = true,
-                },
             },
         },
     },
