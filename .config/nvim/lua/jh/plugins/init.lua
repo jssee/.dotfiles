@@ -1,4 +1,5 @@
 return {
+    "jssee/vim-delight",
     "machakann/vim-sandwich",
     "sheerun/vim-polyglot",
     "tpope/vim-commentary",
