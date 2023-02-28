@@ -8,6 +8,12 @@ return {
     "tpope/vim-unimpaired",
     "wellle/targets.vim",
     {
+        "cormacrelf/dark-notify",
+        config = function()
+            require("dark_notify").run()
+        end,
+    },
+    {
         "steelsojka/pears.nvim",
         config = function()
             require("pears").setup(function(conf)
@@ -23,7 +29,7 @@ return {
         "sainnhe/gruvbox-material",
         init = function()
             vim.g.gruvbox_material_background = "hard"
-            vim.cmd [[colo gruvbox-material]]
+            vim.cmd.colo "gruvbox-material"
         end,
     },
 }
