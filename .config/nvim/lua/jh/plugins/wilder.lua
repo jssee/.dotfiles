@@ -4,23 +4,34 @@ return {
         modes = { ":", "/", "?" },
         enable_cmdline_enter = 1,
     },
+    keys = {
+        {
+            "<tab>",
+            function()
+                local wilder = require "wilder"
+                if wilder.in_context() then
+                    wilder.next()
+                else
+                    return "<tab>"
+                end
+            end,
+            mode = "c",
+        },
+        {
+            "<s-tab>",
+            function()
+                local wilder = require "wilder"
+                if wilder.in_context() then
+                    wilder.previous()
+                else
+                    return "<s-tab>"
+                end
+            end,
+            mode = "c",
+        },
+    },
     init = function()
         local wilder = require "wilder"
-        vim.keymap.set("c", "<tab>", function()
-            if wilder.in_context() then
-                wilder.next()
-            else
-                return "<tab>"
-            end
-        end)
-        vim.keymap.set("c", "<s-tab>", function()
-            if wilder.in_context() then
-                wilder.previous()
-            else
-                return "<s-tab>"
-            end
-        end)
-
         local popupmenu_renderer =
         wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
             border = "rounded",

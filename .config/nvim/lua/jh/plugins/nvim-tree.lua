@@ -14,7 +14,7 @@ return {
             },
         },
     },
-    init = function()
-        vim.keymap.set("n", "-", vim.cmd.NvimTreeFindFileToggle)
-    end,
+    keys = {
+        { "-", vim.cmd.NvimTreeFindFileToggle },
+    },
 }

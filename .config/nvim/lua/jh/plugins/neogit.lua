@@ -13,12 +13,18 @@ return {
             recent = { folded = false },
         },
     },
-    init = function()
-        vim.keymap.set("n", "<leader>gg", function()
-            require("neogit").open { kind = "replace" }
-        end)
-        vim.keymap.set("n", "<leader>gc", function()
-            require("neogit").open { "commit" }
-        end)
-    end,
+    keys = {
+        {
+            "<leader>gg",
+            function()
+                require("neogit").open()
+            end,
+        },
+        {
+            "<leader>gc",
+            function()
+                require("neogit").open { "commit" }
+            end,
+        },
+    },
 }
