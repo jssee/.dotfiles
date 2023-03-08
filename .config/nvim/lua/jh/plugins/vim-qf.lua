@@ -1,5 +1,6 @@
 return {
     "romainl/vim-qf",
+    event = "QuickFixCmdPre",
     keys = {
         -- <Plug>(qf_qf_toggle_stay)
         -- <Plug>(qf_qf_switch)
@@ -12,7 +13,7 @@ return {
         -- <Plug>(qf_loc_next)
         { "<c-n>", [[<Plug>(qf_qf_next)]] },
         { "<c-p>", [[<Plug>(qf_qf_previous)]] },
-        { [[\]], [[<Plug>(qf_qf_toggle_stay)]] },
+        { [[\]],   [[<Plug>(qf_qf_toggle_stay)]] },
     },
     init = function()
         -- Ack.vim-inspired mappings available only in location/quickfix windows:
