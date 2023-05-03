@@ -2,6 +2,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         { "rrethy/nvim-treesitter-endwise" },
+        { "joosepalviste/nvim-ts-context-commentstring" },
+        { "windwp/nvim-ts-autotag" },
     },
     build = ":TSUpdate",
     config = function()
@@ -9,7 +11,14 @@ return {
 
         ts.setup {
             highlight = { enable = true },
+            indent = { enable = true },
             endwise = { enable = true },
+            context_commentstring = {
+                enable = true,
+            },
+            autotag = {
+                enable = true,
+            },
         }
     end,
 }

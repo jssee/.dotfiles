@@ -10,12 +10,15 @@ autocmd("TextYankPost", {
 })
 
 autocmd("FileType", {
+    desc = "Close these windows with `q`",
     pattern = { "help", "man", "qf" },
     group = group,
     command = "nnoremap <buffer> q <cmd>quit<cr>",
 })
 
 autocmd("QuickFixCmdPost", {
+    desc = "Automatically open the quickfix window",
     group = group,
     command = "cwindow",
+    pattern = { "cgetexpr", "lgetexpr" },
 })

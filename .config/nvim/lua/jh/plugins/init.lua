@@ -10,9 +10,9 @@ return {
     "wellle/targets.vim",
     {
         "cormacrelf/dark-notify",
-        config = function()
-            require("dark_notify").run()
-        end,
+        -- config = function()
+        --     require("dark_notify").run()
+        -- end,
     },
     {
         "steelsojka/pears.nvim",

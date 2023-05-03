@@ -32,8 +32,7 @@ return {
     },
     init = function()
         local wilder = require "wilder"
-        local popupmenu_renderer =
-        wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
+        local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
             border = "rounded",
             empty_message = wilder.popupmenu_empty_message_with_spinner(),
             highlighter = wilder.basic_highlighter(),

@@ -7,10 +7,12 @@ return {
         disable_netrw = true,
         view = {
             side = "right",
+            width = 40,
+            centralize_selection = true,
         },
         actions = {
             open_file = {
-                quit_on_open = true,
+                quit_on_open = false,
             },
         },
     },
