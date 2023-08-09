@@ -19,7 +19,6 @@ for o, v in pairs {
         precedes = "←",
     },
     number = true,
-    path = vim.fn.systemlist "fd . --type d",
     ruler = false,
     scrolloff = 999,
     shiftround = true,

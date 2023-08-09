@@ -10,9 +10,9 @@ return {
     "wellle/targets.vim",
     {
         "cormacrelf/dark-notify",
-        -- config = function()
-        --     require("dark_notify").run()
-        -- end,
+        config = function()
+            require("dark_notify").run()
+        end,
     },
     {
         "steelsojka/pears.nvim",
@@ -32,5 +32,14 @@ return {
             vim.g.gruvbox_material_background = "hard"
             vim.cmd.colo "gruvbox-material"
         end,
+    },
+    {
+        "ramojus/mellifluous.nvim",
+        -- init = function()
+        --     vim.cmd.colo "mellifluous"
+        -- end,
+        dependencies = {
+            { "rktjmp/lush.nvim" },
+        },
     },
 }

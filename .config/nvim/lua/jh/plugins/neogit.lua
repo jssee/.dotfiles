@@ -1,5 +1,5 @@
 return {
-    "timuntersberger/neogit",
+    "neogitorg/neogit",
     dependencies = {
         { "sindrets/diffview.nvim" },
         { "nvim-lua/plenary.nvim" },
@@ -11,6 +11,11 @@ return {
         },
         sections = {
             recent = { folded = false },
+        },
+        signs = {
+            -- { CLOSED, OPENED }
+            section = { "▸", "▾" },
+            item = { "▸", "▾" },
         },
     },
     keys = {

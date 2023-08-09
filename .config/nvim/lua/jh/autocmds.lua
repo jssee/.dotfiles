@@ -22,3 +22,17 @@ autocmd("QuickFixCmdPost", {
     command = "cwindow",
     pattern = { "cgetexpr", "lgetexpr" },
 })
+
+autocmd("WinResized", {
+    desc = "Keep window sizes equal on resize",
+    group = group,
+    command = "wincmd =",
+})
+
+autocmd("VimEnter", {
+    desc = "Set path using fd",
+    group = group,
+    callback = function()
+            require"jh/functions".Path()
+    end
+})
