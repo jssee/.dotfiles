@@ -44,6 +44,9 @@
   n = "!n() { git add --all; git rebase --continue; }; n"
   x = rebase --abort
 
+  # pull request reviewing flow
+  rev = "!nvim +DiffviewReview"
+
 [color]
   ui = auto
 

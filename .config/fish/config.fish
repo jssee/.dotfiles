@@ -37,3 +37,7 @@ if status is-interactive
     set hydro_color_duration yellow
     # set hydro_symbol_git_dirty ✦
 end
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true

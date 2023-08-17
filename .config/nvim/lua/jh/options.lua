@@ -6,6 +6,7 @@ for o, v in pairs {
     cursorline = true,
     cursorlineopt = { "number", "screenline" },
     expandtab = true,
+    fillchars = vim.opt.fillchars:append { diff = "╱" },
     grepprg = "rg --vimgrep",
     ignorecase = true,
     infercase = true,
