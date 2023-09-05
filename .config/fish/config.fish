@@ -10,6 +10,8 @@ alias hidedesktop "defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias cleanup "fd -t file -HI -g \"*DS_Store\" -x rm"
 
+abbr p "pnpm"
+
 if status is-interactive
     # source asdf
     if test -d $HOME/.asdf
@@ -25,19 +27,15 @@ if status is-interactive
         fisher
     end
 
-    if type -q hub
-        eval (hub alias -s)
-    end
-
     if type -q direnv
         direnv hook fish | source
     end
 
     set hydro_color_git magenta
     set hydro_color_duration yellow
-    # set hydro_symbol_git_dirty ✦
 end
 
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
+
