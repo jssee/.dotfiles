@@ -1,6 +1,4 @@
 local M = {}
-local loop = vim.loop
-local res = {}
 
 M.Rg = function(...)
     vim.api.nvim_exec_autocmds("QuickFixCmdPre", { pattern = "cgetexpr", modeline = false })
@@ -18,8 +16,11 @@ M.Rg = function(...)
 end
 
 M.Path = function()
+    local loop = vim.loop
+    local res = {}
     local stdout = loop.new_pipe(false)
     local stderr = loop.new_pipe(false)
+
     local onread = function(err, data)
         if err then
             print("ERROR: ", err)
@@ -45,6 +46,8 @@ M.Path = function()
 
         vim.api.nvim_set_option("path", table.concat(paths, ","))
     end
+
+    local handle
     handle = loop.spawn(
         "fd",
         {
@@ -53,10 +56,6 @@ M.Path = function()
                 "2",
                 "-t",
                 "d",
-                "-E",
-                "bin/",
-                "-E",
-                "pack/",
             },
             stdio = { stdout, stderr },
         },
