@@ -28,18 +28,16 @@ return {
     },
     {
         "sainnhe/gruvbox-material",
-        init = function()
-            vim.g.gruvbox_material_background = "hard"
-            vim.cmd.colo "gruvbox-material"
-        end,
+        -- init = function()
+        --     vim.g.gruvbox_material_background = "hard"
+        --     vim.cmd.colo "gruvbox-material"
+        -- end,
     },
     {
-        "ramojus/mellifluous.nvim",
-        -- init = function()
-        --     vim.cmd.colo "mellifluous"
-        -- end,
-        dependencies = {
-            { "rktjmp/lush.nvim" },
-        },
+        "p00f/alabaster.nvim",
+        url = "https://git.sr.ht/~p00f/alabaster.nvim/",
+        init = function()
+            vim.cmd.colo "alabaster"
+        end,
     },
 }
