@@ -24,5 +24,9 @@ return {
             [[\]],
             [[<Plug>(qf_qf_toggle_stay)]],
         },
+        {
+            [[|]],
+            [[<Plug>(qf_loc_toggle_stay)]],
+        },
     },
 }

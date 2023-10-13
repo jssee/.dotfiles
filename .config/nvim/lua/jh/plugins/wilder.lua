@@ -1,5 +1,6 @@
 return {
     "gelguy/wilder.nvim",
+    enabled = false,
     opts = {
         modes = { ":", "/", "?" },
         enable_cmdline_enter = 1,

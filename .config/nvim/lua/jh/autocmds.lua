@@ -33,6 +33,24 @@ autocmd("VimEnter", {
     desc = "Set path using fd",
     group = group,
     callback = function()
-            require"jh/functions".Path()
-    end
+        require("jh/functions").Path()
+    end,
+})
+
+autocmd("DiagnosticChanged", {
+    desc = "Send errors and warning to loclist",
+    group = group,
+    callback = function()
+        if vim.diagnostic.get(0) == 0 then
+            vim.cmd [[lclose]]
+        end
+        vim.diagnostic.setloclist { open = false }
+    end,
+})
+autocmd({"BufRead", "BufEnter"}, {
+    group = group,
+    pattern = { "*.astro" },
+    callback = function()
+        vim.o.filetype = "astro"
+    end,
 })

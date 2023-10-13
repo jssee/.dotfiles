@@ -51,6 +51,8 @@ for g, v in pairs {
     mapleader = " ",
     softtabstop = 2,
     showbreak = "↪ ",
+    python_host_prog = "~/.asdf/shims/python",
+    python3_host_prog = "~/.asdf/shims/python",
 } do
     vim.g[g] = v
 end
