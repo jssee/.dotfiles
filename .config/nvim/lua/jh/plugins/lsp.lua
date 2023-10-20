@@ -1,69 +1,39 @@
 return {
     "vonheikemen/lsp-zero.nvim",
-    branch = "v2.x",
+    branch = "v3.x",
     dependencies = {
         { "neovim/nvim-lspconfig" },
         { "williamboman/mason.nvim" },
         { "williamboman/mason-lspconfig.nvim" },
-        { "nvimtools/none-ls.nvim" },
     },
     config = function()
-        local lsp = require("lsp-zero").preset { name = "lsp-only" }
-        local lspconfig = require "lspconfig"
+        local lsp_zero = require("lsp-zero").preset { name = "lsp-only" }
 
-        lsp.on_attach(function(_, bufnr)
+        lsp_zero.on_attach(function(_, bufnr)
             -- :help lsp-zero-keybindings
-            lsp.default_keymaps { buffer = bufnr }
+            lsp_zero.default_keymaps { buffer = bufnr }
         end)
 
-        lsp.set_sign_icons {
+        lsp_zero.set_sign_icons {
             error = "✘",
             warn = "▲",
             hint = "⚑",
             info = "»",
         }
 
-        -- configure lua_ls for neovim
-        lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-
-        lsp.format_mapping("gq", {
-            format_opts = {
-                async = false,
-                timeout_ms = 10000,
+        require("mason").setup {}
+        require("mason-lspconfig").setup {
+            ensure_installed = {
+                "lua_ls",
+                "tsserver",
             },
-            servers = {
-                ["null-ls"] = {
-                    "css",
-                    "html",
-                    "javascript",
-                    "lua",
-                    "python",
-                    "svelte",
-                    "typescript",
-                },
-            },
-        })
-
-        lsp.setup()
-
-        local null_ls = require "null-ls"
-        null_ls.setup {
-            sources = {
-                null_ls.builtins.formatting.stylua,
-                null_ls.builtins.formatting.prettier.with {
-                    extra_filetypes = { "svelte" },
-                },
-                null_ls.builtins.diagnostics.eslint_d.with {
-                    condition = function(utils)
-                        return utils.root_has_file { ".eslintrc", ".eslintrc.js" }
-                    end,
-                },
-                null_ls.builtins.formatting.mix.with {
-                    extra_filetypes = { "eelixir" },
-                },
-                null_ls.builtins.diagnostics.credo.with {
-                    extra_filetypes = { "eelixir" },
-                },
+            handlers = {
+                lsp_zero.default_setup,
+                lua_ls = function()
+                    -- configure lua language server
+                    local lua_opts = lsp_zero.nvim_lua_ls()
+                    require("lspconfig").lua_ls.setup(lua_opts)
+                end,
             },
         }
     end,
