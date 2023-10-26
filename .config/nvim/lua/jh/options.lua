@@ -1,7 +1,6 @@
 for o, v in pairs {
     breakindent = true,
     clipboard = vim.opt.clipboard:append "unnamedplus",
-    cmdheight = 0,
     completeopt = { "menuone", "noselect" },
     copyindent = true,
     cursorline = true,
