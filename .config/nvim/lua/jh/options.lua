@@ -1,6 +1,7 @@
 for o, v in pairs {
     breakindent = true,
     clipboard = vim.opt.clipboard:append "unnamedplus",
+    cmdheight = 0,
     completeopt = { "menuone", "noselect" },
     copyindent = true,
     cursorline = true,
@@ -20,6 +21,7 @@ for o, v in pairs {
         precedes = "←",
     },
     number = true,
+    pumblend = 10,
     ruler = false,
     scrolloff = 999,
     shiftround = true,
@@ -41,6 +43,7 @@ for o, v in pairs {
     undofile = true,
     updatetime = 300,
     wildmenu = true,
+    winblend = 10,
 } do
     vim.opt[o] = v
 end

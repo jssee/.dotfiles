@@ -2,7 +2,18 @@ return {
     "vonheikemen/lsp-zero.nvim",
     branch = "v3.x",
     dependencies = {
-        { "neovim/nvim-lspconfig" },
+        {
+            "neovim/nvim-lspconfig",
+            dependencies = {
+                { "hrsh7th/cmp-nvim-lsp" },
+            },
+        },
+        {
+            "hrsh7th/nvim-cmp",
+            dependencies = {
+                { "L3MON4D3/LuaSnip" },
+            },
+        },
         { "williamboman/mason.nvim" },
         { "williamboman/mason-lspconfig.nvim" },
     },
@@ -34,6 +45,22 @@ return {
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require("lspconfig").lua_ls.setup(lua_opts)
                 end,
+            },
+        }
+
+        local cmp = require "cmp"
+        local cmp_action = require("lsp-zero").cmp_action()
+
+        cmp.setup {
+            sources = {
+                { name = "path" },
+                { name = "nvim_lsp" },
+            },
+            formatting = lsp_zero.cmp_format(),
+            mapping = cmp.mapping.preset.insert {
+                ["<Tab>"] = cmp_action.luasnip_supertab(),
+                ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+                ["<CR>"] = cmp.mapping.confirm { select = true },
             },
         }
     end,
