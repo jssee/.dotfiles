@@ -1,8 +1,14 @@
 return {
     "neogitorg/neogit",
     dependencies = {
-        { "sindrets/diffview.nvim", lazy = false },
-        { "nvim-lua/plenary.nvim" },
+        {
+            "sindrets/diffview.nvim",
+            lazy = false,
+            dependencies = {
+                "nvim-tree/nvim-web-devicons",
+            },
+        },
+        { "nvim-lua/plenary.nvim", lazy = false, priority = 1000 },
     },
     init = function()
         local cmd = vim.api.nvim_create_user_command

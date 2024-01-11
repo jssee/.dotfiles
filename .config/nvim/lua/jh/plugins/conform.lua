@@ -2,13 +2,14 @@ return {
     "stevearc/conform.nvim",
     opts = {
         formatters_by_ft = {
-            astro = { "prettierd" },
-            css = { "prettierd" },
-            html = { "prettierd" },
-            javascript = { "prettierd" },
+            astro = { "prettier" },
+            css = { "prettier" },
+            html = { "prettier" },
+            javascript = { "prettier" },
             lua = { "stylua" },
             python = { "isort", "black" },
-            typescript = { "prettierd" },
+            svelte = { "prettier" },
+            typescript = { "prettier" },
         },
         format_on_save = {
             timeout_ms = 800,

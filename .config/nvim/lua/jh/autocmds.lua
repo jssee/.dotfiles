@@ -33,7 +33,7 @@ autocmd("VimEnter", {
     desc = "Set path using fd",
     group = group,
     callback = function()
-        require("jh/functions").Path()
+        require("jh.functions").Path()
     end,
 })
 
@@ -47,10 +47,19 @@ autocmd("DiagnosticChanged", {
         vim.diagnostic.setloclist { open = false }
     end,
 })
-autocmd({"BufRead", "BufEnter"}, {
+autocmd({ "BufRead", "BufEnter" }, {
     group = group,
     pattern = { "*.astro" },
     callback = function()
         vim.o.filetype = "astro"
+    end,
+})
+
+autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.filereadable "lazy-lock.json" == 1 or vim.fn.getcwd() == vim.env.HOME then
+            vim.env.GIT_DIR = vim.fn.expand "~/.dotfiles"
+            vim.env.GIT_WORK_TREE = vim.fn.expand "~"
+        end
     end,
 })

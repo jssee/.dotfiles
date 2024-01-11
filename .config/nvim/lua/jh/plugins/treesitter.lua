@@ -13,9 +13,6 @@ return {
             highlight = { enable = true },
             indent = { enable = true },
             endwise = { enable = true },
-            context_commentstring = {
-                enable = true,
-            },
             autotag = {
                 enable = true,
             },
