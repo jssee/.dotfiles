@@ -11,6 +11,7 @@ alias showdesktop "defaults write com.apple.finder CreateDesktop -bool true && k
 alias cleanup "fd -t file -HI -g \"*DS_Store\" -x rm"
 
 abbr p "pnpm"
+abbr ld "lazydocker"
 
 if status is-interactive
     # source asdf
