@@ -2,20 +2,16 @@ return {
     "vonheikemen/lsp-zero.nvim",
     branch = "v3.x",
     dependencies = {
-        {
-            "neovim/nvim-lspconfig",
-            dependencies = {
-                { "hrsh7th/cmp-nvim-lsp" },
-            },
-        },
+        { "neovim/nvim-lspconfig" },
+        { "williamboman/mason.nvim" },
+        { "williamboman/mason-lspconfig.nvim" },
         {
             "hrsh7th/nvim-cmp",
             dependencies = {
+                { "hrsh7th/cmp-nvim-lsp" },
                 { "L3MON4D3/LuaSnip" },
             },
         },
-        { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim" },
     },
     config = function()
         local lsp_zero = require("lsp-zero").preset { name = "lsp-only" }

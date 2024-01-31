@@ -47,6 +47,7 @@ autocmd("DiagnosticChanged", {
         vim.diagnostic.setloclist { open = false }
     end,
 })
+
 autocmd({ "BufRead", "BufEnter" }, {
     group = group,
     pattern = { "*.astro" },
@@ -61,5 +62,14 @@ autocmd("VimEnter", {
             vim.env.GIT_DIR = vim.fn.expand "~/.dotfiles"
             vim.env.GIT_WORK_TREE = vim.fn.expand "~"
         end
+    end,
+})
+
+autocmd("VimEnter", {
+    group = group,
+    desc = "Remove hlsearch when no longer needed",
+    callback = function()
+        local listener = vim.api.nvim_create_namespace "key_listener"
+        vim.on_key(require("jh.functions").KeyListener, listener)
     end,
 })

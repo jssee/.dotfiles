@@ -72,4 +72,21 @@ M.Path = function()
     loop.read_start(stderr, onread)
 end
 
+M.KeyListener = function(char)
+    local function toggle(c)
+        local keys = { "<CR>", "n", "N", "*", "#", "?", "/" }
+        local new_hlsearch = vim.tbl_contains(keys, c)
+
+        if vim.opt.hlsearch:get() ~= new_hlsearch then
+            vim.opt.hlsearch = new_hlsearch
+        end
+    end
+
+    local key = vim.fn.keytrans(char)
+    local mode = vim.fn.mode()
+    if mode == "n" then
+        toggle(key)
+    end
+end
+
 return M
