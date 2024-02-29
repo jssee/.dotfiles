@@ -10,95 +10,35 @@ sudo -v
 # keep-alive: update existing `sudo` time stamp until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# disable the “Are you sure you want to open this application?” dialog
-# stopped working on big sur :(
-# defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
-# enable 3 finger window drag
+# trackpad: 
 defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerDrag" -bool "true"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "Clicking" -bool "true"
 
-# automatically quit printer app once the print jobs complete
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+# finder:
+defaults write com.apple.finder "ShowPathbar" -bool "true"
+defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"
+defaults write com.apple.finder "NewWindowTarget" -string "PfDe"
+defaults write com.apple.finder "NewWindowTargetPath" -string "file://${HOME}/Desktop/"
+defaults write com.apple.finder "ShowStatusBar" -bool "true"
+defaults write com.apple.finder "FXPreferredViewStyle" -string "clmv"
 
-# when performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
-# keep folders on top when sorting by name
-defaults write com.apple.finder _FXSortFoldersFirst -bool true
+# dock:
+defaults write com.apple.dock "show-recents" -bool "false"
+defaults write com.apple.dock "wvous-bl-corner" -int 11
+defaults write com.apple.dock "wvous-br-corner" -int 4
+defaults write com.apple.dock "persistent-apps" -array
+defaults write com.apple.dock "autohide" -bool "true"
 
-# don’t show recent applications in Dock
-defaults write com.apple.dock show-recents -bool false
+# system preferences:
+defaults write com.apple.systempreferences "NSQuitAlwaysKeepsWindows" -bool "false"
 
-# enable hotcorners
-defaults write com.apple.dock wvous-tl-corner -int 1
-defaults write com.apple.dock wvous-tr-corner -int 14
-defaults write com.apple.dock wvous-bl-corner -int 11
-defaults write com.apple.dock wvous-br-corner -int 4
-
-# Avoid creating .DS_Store files on network or USB volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-# wipe all (default) app icons from the Dock
-defaults write com.apple.dock persistent-apps -array
-
-# show only open applications in the Dock
-defaults write com.apple.dock static-only -bool true
-
-# speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
-
-# enable snap-to-grid for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-
-# automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
-
-# make Safari’s search banners default to Contains instead of Starts With
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-
-# disable font-smoothing for crisper fonts
-defaults -currentHost write -g AppleFontSmoothing -int 0
-
-# make key repeats really fast
-defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
-defaults write -g KeyRepeat -int 2 # normal minimum is 2 (30 ms)
-
-# Set Desktop as the default location for new Finder windows
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
-
-#show pathbar in finder
-defaults write com.apple.finder "ShowPathbar" -bool "true" 
-
-# show file extensions
-defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true" 
-
-# kill affected apps
-for app in "Activity Monitor" \
-  "Address Book" \
-  "Calendar" \
-  "cfprefsd" \
-  "Contacts" \
+# cleanup: 
+# kill all affected apps
+for app in "Finder" \
   "Dock" \
-  "Finder" \
-  "Mail" \
-  "Messages" \
-  "Photos" \
-  "Safari" \
-  "SystemUIServer" \
-  "Terminal" \
-  "Transmission" \
-  "iCal"; do
+  "cfprefsd" \
+  "SystemUIServer"; do
   killall "${app}" &> /dev/null
 done
 
-echo "Defaults are now set."
-echo "Some changes require a restart to take effect."
