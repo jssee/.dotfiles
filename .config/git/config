@@ -5,87 +5,56 @@
 [alias]
   aliases = config --get-regexp alias
 
-  b = branch -vv
-  bx = branch -d
-  bX = branch -D
-  branches = branch -a
-
-  f = fetch
-  p = pull --autostash
   a = add
   aa = add --all
-  fp = push --force-with-lease
+
+  b = branch -vv
+  bb = branch -a -vv
+  bx = branch -d
+
   c = commit
+  cc = "!git add --all && git commit -av" 
+  amend = commit --amend --reuse-message=HEAD
+
   d = "!git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-  s = status --short --branch
+
+  f = fetch --prune
+
+  p = push
+  pf = push --force-with-lease
+
+  r = "!r() { git fetch origin \"$1\"; git rebase origin/\"$1\" -i; }; r"
+  rb = "!r() { git fetch origin \"$1\"; git rebase origin/\"$1\" -i --keep-base; }; r"
+
+  z = stash
+  zz = stash save -u
+
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
+  s = status --short --branch
 
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
 
-  # fuzzy branch switching
-  bb = "!bb() { git switch \"$(git branch -a | cut -c 3- | fzy)\"; }; bb"
-
-  # set upstream branch
   up = "!up() { git push -u origin \"$(git symbolic-ref --short HEAD)\"; }; up"
-
-  # switch to a branch, create it if necesary
   go = "!go() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; go"
-
-  # delete merged branches
-  tidy = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-  trim = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
-
-  # open gitui, requires gitui to be installed
-  ui = "!gitui"
-
-  # rebasing flow
-  r = "!r() { git fetch origin main; git rebase origin/main -i --autostash; }; r"
-  n = "!n() { git add --all; git rebase --continue; }; n"
-  x = rebase --abort
-
-  # pull request reviewing flow
-  rev = "!nvim +DiffviewReview"
-
-[color]
-  ui = auto
-
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
-
-[color "status"]
-  added = green
-  changed = yellow
-  untracked = cyan
-
-[diff]
-  tool = nvimdiff
-  external = difft
-
-[difftool]
-  prompt = false
-
-[difftool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-
-[merge]
-  tool = nvimdiff
-
-[mergetool]
-  prompt = true
-
-[mergetool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
-
-[url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
-
-[url "git://github.com/"]
-  insteadOf = "github:"
+  trim = "!t() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; t"
 
 [init]
   defaultBranch = main
+
+[branch]
+  sort= -committerdate
+
+[diff]
+  algorithm = histogram
+  external = difft
+
+[push]
+  default = current
+
+[rebase]
+  autosquash = true
+  autostash = true
+
+[rerere]
+  enabled = true
