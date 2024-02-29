@@ -1,0 +1,55 @@
+
+#!/usr/bin/env bash
+
+set -e
+
+SUBDIRECTORY_OK=1
+source "$(git --exec-path)/git-sh-setup"
+
+# Generate a portable in-place sed "variable".
+case $(uname -s) in
+*Linux*)
+    IN_PLACE_SED="sed -i" ;;
+*)
+    IN_PLACE_SED="sed -i ''" ;;
+esac
+
+has_parent() {
+    git rev-parse --quiet "$1~1^{commit}" &> /dev/null
+}
+
+is_merge() {
+    has_parent "$1" && test -n "$(git rev-list -1 --merges $1~1..$1)"
+}
+
+# Go to top level
+cd_to_toplevel
+
+# Only if we are clean
+require_clean_work_tree $cmd
+
+for ((iter=0;iter<${1:-1};iter++)); do
+    # Not if this is a merge commit.
+    is_merge "HEAD" && die "HEAD is a merge commit, which is unsupported"
+
+    # Not if we are in a non-interactive rebase
+    test -d ".git/rebase-apply" && die "Non-interactive rebase is unsupported"
+
+    # If we're not in an interactive rebase, there's no next commit
+    if ! test -d ".git/rebase-merge"; then
+        echo "At top"
+        exit
+    fi
+
+    # Make the next 'pick' an 'edit'.
+    # See https://www.linuxtopia.org/online_books/linux_tool_guides/the_sed_faq/sedfaq4_004.html
+    GIT_SEQUENCE_EDITOR="$IN_PLACE_SED -e '1{x;s/^/first/;x;}' -e '1,/^pick/{x;/first/s///;x;s/^pick/edit/;}'" git rebase --edit-todo
+
+    # Go to next commit.
+    if ! errtext=$(git rebase --continue 2>&1); then
+        echo "$errtext" 1>&2
+        die
+    fi
+
+    echo HEAD is now at "$(git log --format='%h %s' -n 1 HEAD)"
+done
