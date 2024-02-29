@@ -1,6 +1,5 @@
 SHELL = /bin/bash
-ASDF_PLUGINS := nodejs ruby erlang elixir
-ASDF_NPM_PACKAGES := typescript vscode-langservers-extracted typescript-language-server typescript @fsouza/prettierd eslint_d
+ASDF_PLUGINS := nodejs erlang elixir ruby
 
 .PHONY: all
 all: brew asdf macos
@@ -15,11 +14,8 @@ brew:
 	brew bundle --file=$(HOME)/.local/share/install/Brewfile
 
 asdf:
-	which $@ &> /dev/null || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+	which $@ &> /dev/null || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 	. $(HOME)/.asdf/asdf.sh
-	if [ ! -f $(HOME)/.default-npm-packages ]; then \
-		for PKG in $(ASDF_NPM_PACKAGES); do echo $$PKG >> $(HOME)/.default-npm-packages; done; \
-	fi;
 	for PLUGIN in $(ASDF_PLUGINS); do asdf plugin add $$PLUGIN https://github.com/asdf-vm/asdf-$$PLUGIN.git; done
 	for PLUGIN in $(ASDF_PLUGINS); do asdf install $$PLUGIN latest; done
 	for PLUGIN in $(ASDF_PLUGINS); do asdf global $$PLUGIN latest; done
