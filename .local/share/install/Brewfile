@@ -1,12 +1,10 @@
 tap "homebrew/services"
-tap "nvie/tap"
 tap "cormacrelf/tap"
 
 # utilities
 brew "coreutils"
 brew "dark-notify"
 brew "fd"
-brew "findutils"
 brew "fish"
 brew "fzy"
 brew "gnupg"
@@ -16,32 +14,22 @@ brew "openssl"
 brew "renameutils"
 brew "ripgrep"
 brew "tree"
-brew "zsh-completions"
-
-# git tools
-brew "gh"
-brew "git"
-brew "git-revise"
-brew "hub"
-brew "nvie/tap/git-toolbelt"
 
 # coding tools
 brew "difftastic"
 brew "direnv"
+brew "gh"
+brew "git"
 brew "neovim"
 brew "openconnect"
 brew "postgresql"
-brew "tmux"
 
 # apps
+cask "arc"
 cask "1password"
-cask "dash"
 cask "figma"
 cask "iina"
 cask "kap"
-cask "obsidian"
 cask "raycast"
 cask "rectangle-pro"
-cask "transmission"
-cask "typeface"
 
