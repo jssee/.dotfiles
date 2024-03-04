@@ -1,28 +1,27 @@
+tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "cormacrelf/tap"
 
-# utilities
+# tools
 brew "coreutils"
 brew "dark-notify"
+brew "difftastic"
+brew "direnv"
 brew "fd"
 brew "fish"
 brew "fzy"
+brew "gh"
+brew "git"
 brew "gnupg"
 brew "jq"
 brew "moreutils"
+brew "neovim"
+brew "openconnect"
 brew "openssl"
+brew "postgresql"
 brew "renameutils"
 brew "ripgrep"
 brew "tree"
-
-# coding tools
-brew "difftastic"
-brew "direnv"
-brew "gh"
-brew "git"
-brew "neovim"
-brew "openconnect"
-brew "postgresql"
 
 # apps
 cask "arc"
@@ -32,4 +31,3 @@ cask "iina"
 cask "kap"
 cask "raycast"
 cask "rectangle-pro"
-

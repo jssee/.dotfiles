@@ -1,4 +1,3 @@
-SHELL = /bin/bash
 ASDF_PLUGINS := nodejs erlang elixir ruby
 
 .PHONY: all
@@ -11,7 +10,7 @@ brew:
 	which $@ &> /dev/null || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 	brew update
 	brew upgrade
-	brew bundle --file=$(HOME)/.local/share/install/Brewfile
+	brew bundle
 
 asdf:
 	which $@ &> /dev/null || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
