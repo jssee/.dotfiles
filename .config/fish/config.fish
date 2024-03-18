@@ -2,7 +2,7 @@ set fish_greeting
 
 set -gx EDITOR nvim
 
-alias l "ls -laG"
+alias l "gls -la --color --group-directories-first --file-type"
 alias dg "$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias show "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
