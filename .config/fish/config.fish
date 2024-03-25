@@ -14,13 +14,6 @@ abbr p "pnpm"
 abbr ld "lazydocker"
 
 if status is-interactive
-    # source asdf
-    if test -d $HOME/.asdf
-        source ~/.asdf/asdf.fish
-        # manually add completions
-        # ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-    end
-
     # ensure fisher and plugins are installed
     if not test -f $HOME/.config/fish/functions/fisher.fish
         echo "🎣 installing fisher..."
@@ -32,6 +25,10 @@ if status is-interactive
         direnv hook fish | source
     end
 
+    if test -f $HOME/.local/bin/mise
+        $HOME/.local/bin/mise activate fish | source
+    end
+
     set hydro_color_git magenta
     set hydro_color_duration yellow
 end
@@ -39,4 +36,3 @@ end
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
-

@@ -1,7 +1,8 @@
-ASDF_PLUGINS := nodejs erlang elixir ruby
+MISE_PLUGINS := node erlang elixir ruby
+FISH_PATH := grep "fish" /etc/shells
 
 .PHONY: all
-all: brew asdf macos
+all: brew mise macos check_shell
 
 macos:
 	$(HOME)/.local/share/install/macos
@@ -12,11 +13,15 @@ brew:
 	brew upgrade
 	brew bundle
 
-asdf:
-	which $@ &> /dev/null || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
-	. $(HOME)/.asdf/asdf.sh
-	for PLUGIN in $(ASDF_PLUGINS); do asdf plugin add $$PLUGIN https://github.com/asdf-vm/asdf-$$PLUGIN.git; done
-	for PLUGIN in $(ASDF_PLUGINS); do asdf install $$PLUGIN latest; done
-	for PLUGIN in $(ASDF_PLUGINS); do asdf global $$PLUGIN latest; done
-	asdf update
+mise:
+	which $@ &> /dev/null || curl https://mise.run | sh
+	for PLUGIN in $(MISE_PLUGINS); do $(HOME)/.local/bin/mise use -g $$PLUGIN; done
+
+check_shell:
+	@if [ "$$SHELL" != "$$(command -v fish)" ]; then \
+		echo "Changing shell to fish..."; \
+		$(FISH_PATH) | xargs chsh -s; \
+		else \
+		echo "Current shell is fish."; \
+		fi
 # vim: set tabstop=4:softtabstop=4:shiftwidth=4:noexpandtab
