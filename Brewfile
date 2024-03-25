@@ -24,10 +24,12 @@ brew "ripgrep"
 brew "tree"
 
 # apps
-cask "arc"
 cask "1password"
+cask "arc"
 cask "figma"
+cask "hiddenbar"
 cask "iina"
 cask "kap"
+cask "keepingyouawake"
 cask "raycast"
 cask "rectangle-pro"
