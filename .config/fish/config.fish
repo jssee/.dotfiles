@@ -29,6 +29,7 @@ if status is-interactive
         $HOME/.local/bin/mise activate fish | source
     end
 
+    set hydro_fetch true
     set hydro_color_git magenta
     set hydro_color_duration yellow
 end
