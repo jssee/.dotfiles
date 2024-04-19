@@ -33,18 +33,7 @@ autocmd("VimEnter", {
     desc = "Set path using fd",
     group = group,
     callback = function()
-        require("jh.functions").Path()
-    end,
-})
-
-autocmd("DiagnosticChanged", {
-    desc = "Send errors and warning to loclist",
-    group = group,
-    callback = function()
-        if vim.diagnostic.get(0) == 0 then
-            vim.cmd [[lclose]]
-        end
-        vim.diagnostic.setloclist { open = false }
+        require("functions").Path()
     end,
 })
 
@@ -57,19 +46,10 @@ autocmd({ "BufRead", "BufEnter" }, {
 })
 
 autocmd("VimEnter", {
-    callback = function()
-        if vim.fn.filereadable "lazy-lock.json" == 1 or vim.fn.getcwd() == vim.env.HOME then
-            vim.env.GIT_DIR = vim.fn.expand "~/.dotfiles"
-            vim.env.GIT_WORK_TREE = vim.fn.expand "~"
-        end
-    end,
-})
-
-autocmd("VimEnter", {
     group = group,
     desc = "Remove hlsearch when no longer needed",
     callback = function()
         local listener = vim.api.nvim_create_namespace "key_listener"
-        vim.on_key(require("jh.functions").KeyListener, listener)
+        vim.on_key(require("functions").KeyListener, listener)
     end,
 })

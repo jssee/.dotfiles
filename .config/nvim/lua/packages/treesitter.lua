@@ -7,9 +7,7 @@ return {
     },
     build = ":TSUpdate",
     config = function()
-        local ts = require "nvim-treesitter.configs"
-
-        ts.setup {
+        require("nvim-treesitter.configs").setup {
             highlight = { enable = true },
             indent = { enable = true },
             endwise = { enable = true },

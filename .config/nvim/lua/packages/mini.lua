@@ -35,6 +35,18 @@ return {
         version = false,
         config = true,
         lazy = false,
+        opts = {
+            window = {
+                config = {
+                    relative = "cursor",
+                    anchor = "NW",
+                    row = 0,
+                    col = 0,
+                    width = 40,
+                    height = 20,
+                },
+            },
+        },
         keys = {
             {
                 "<leader><space>",
@@ -84,13 +96,6 @@ return {
             })
         end,
     },
-    { "echasnovski/mini.ai", version = false, config = true },
-    { "echasnovski/mini.align", version = false, config = true },
-    { "echasnovski/mini.comment", version = false, config = true },
-    { "echasnovski/mini.move", version = false, config = true },
-    { "echasnovski/mini.operators", version = false, config = true },
-    { "echasnovski/mini.pairs", version = false, config = true },
-    { "echasnovski/mini.splitjoin", version = false, config = true },
     {
         "echasnovski/mini.starter",
         version = false,
@@ -101,7 +106,6 @@ return {
                 silent = true,
                 items = {
                     starter.sections.pick(),
-                    starter.sections.recent_files(6, true),
                     starter.sections.recent_files(4, false),
                     starter.sections.builtin_actions(),
                 },
@@ -109,4 +113,9 @@ return {
         end,
     },
     { "echasnovski/mini.surround", version = false, config = true },
+    { "echasnovski/mini.ai", version = false, config = true },
+    { "echasnovski/mini.align", version = false, config = true },
+    { "echasnovski/mini.comment", version = false, config = true },
+    { "echasnovski/mini.operators", version = false, config = true },
+    { "echasnovski/mini.pairs", version = false, config = true },
 }

@@ -4,9 +4,6 @@ return {
         {
             "sindrets/diffview.nvim",
             lazy = false,
-            dependencies = {
-                "nvim-tree/nvim-web-devicons",
-            },
         },
         { "nvim-lua/plenary.nvim", lazy = false, priority = 1000 },
     },
@@ -21,7 +18,12 @@ return {
                 vim.cmd.DiffviewOpen "origin/HEAD...HEAD --imply-local"
             else
                 -- review a PR by commit
-                vim.cmd.DiffviewFileHistory "--range=origin/HEAD...HEAD --right-only --no-merges --imply-local"
+                vim.cmd.DiffviewFileHistory [[
+                                        --range=origin/HEAD...HEAD
+                                        --right-only
+                                        --no-merges
+                                        --imply-local
+                                ]]
             end
         end, {
             bang = true,
@@ -54,36 +56,42 @@ return {
             function()
                 require("neogit").open()
             end,
+            desc = "git status",
         },
         {
             "<leader>gc",
             function()
                 require("neogit").open { "commit" }
             end,
+            desc = "git commit",
         },
         {
             "<leader>gh",
             function()
                 vim.cmd.DiffviewFileHistory "%"
             end,
+            desc = "git file history",
         },
         {
             "<leader>gd",
             function()
                 vim.cmd.DiffviewOpen "origin/HEAD"
             end,
+            desc = "git diff",
         },
         {
             "<leader>gr",
             function()
                 vim.cmd.DiffviewReview()
             end,
+            desc = "review changed files",
         },
         {
             "<leader>gR",
             function()
                 vim.cmd.DiffviewReview { bang = true }
             end,
+            desc = "review branch commits",
         },
     },
 }

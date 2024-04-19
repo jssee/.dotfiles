@@ -7,7 +7,6 @@ return {
             html = { "prettier" },
             javascript = { "prettier" },
             lua = { "stylua" },
-            python = { "isort", "black" },
             svelte = { "prettier" },
             typescript = { "prettier" },
         },

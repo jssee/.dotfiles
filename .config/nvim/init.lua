@@ -1,6 +1,9 @@
--- bootstrap lazy.nvim
+require "opt"
+require "autocmd"
+require "keymap"
+
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system {
         "git",
         "clone",
@@ -12,9 +15,4 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require "jh.options"
-require "jh.keymaps"
-require "jh.autocmds"
-require "jh.commands"
-
-require("lazy").setup "jh.plugins"
+require("lazy").setup "packages"
