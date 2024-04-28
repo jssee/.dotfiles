@@ -8,7 +8,7 @@ macos:
 	$(HOME)/.local/share/install/macos
 
 brew:
-	which $@ &> /dev/null || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+	which $@ &> /dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew update
 	brew upgrade
 	brew bundle
