@@ -19,3 +19,8 @@ tmp/**/*
 .dotfiles
 .config/nvim/pack/*
 !.config/nvim/pack/.keep
+*.ignore.*
+.supermaven/
+
+
+

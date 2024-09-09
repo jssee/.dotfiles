@@ -14,7 +14,8 @@
 
   c = commit
   cc = "!git add --all && git commit -av" 
-  amend = commit --amend --reuse-message=HEAD
+  extend = commit --amend --reuse-message=HEAD
+  undo = reset --soft @~
 
   d = "!git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
@@ -23,8 +24,12 @@
   p = push
   pf = push --force-with-lease
 
-  r = "!r() { git fetch origin \"$1\"; git rebase origin/\"$1\" -i; }; r"
-  rb = "!r() { git fetch origin \"$1\"; git rebase origin/\"$1\" -i --keep-base; }; r"
+  r = "!r() { git fetch origin \"$1\"; git rebase origin/\"$1\"; }; r"
+  rb = "!r() { git fetch origin \"$1\"; git rebase origin/\"$1\" --keep-base; }; r"
+
+  w = worktree
+  wa = worktree add
+  wl = worktree list
 
   z = stash
   zz = stash save -u
