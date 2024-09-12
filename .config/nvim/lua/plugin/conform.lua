@@ -6,21 +6,27 @@ return {
             css = { "prettier" },
             html = { "prettier" },
             javascript = { "prettier" },
+            javascriptreact = { "prettier" },
             lua = { "stylua" },
             svelte = { "prettier" },
             typescript = { "prettier" },
+            typescriptreact = { "prettier" },
+            go = { "gofmt" },
         },
         format_on_save = {
             timeout_ms = 800,
-            lsp_fallback = true,
         },
     },
     init = function()
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        vim.g.format_on_save = true
+
         vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*",
             callback = function(args)
-                require("conform").format { bufnr = args.buf }
+                if vim.g.format_on_save then
+                    require("conform").format { bufnr = args.buf }
+                end
             end,
         })
 
@@ -35,5 +41,9 @@ return {
             end
             require("conform").format { async = true, lsp_fallback = true, range = range }
         end, { range = true })
+
+        vim.api.nvim_create_user_command("ToggleFormatOnSave", function()
+            vim.g.format_on_save = not vim.g.format_on_save
+        end, {})
     end,
 }

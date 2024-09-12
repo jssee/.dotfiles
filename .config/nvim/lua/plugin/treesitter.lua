@@ -7,12 +7,23 @@ return {
     },
     build = ":TSUpdate",
     config = function()
-        require("nvim-treesitter.configs").setup {
+        local ts = require "nvim-treesitter.configs"
+
+        ts.setup {
+            auto_install = true,
             highlight = { enable = true },
             indent = { enable = true },
             endwise = { enable = true },
             autotag = {
                 enable = true,
+            },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<cr>",
+                    node_incremental = "<cr>",
+                    node_decremental = "<s-cr>",
+                },
             },
         }
     end,

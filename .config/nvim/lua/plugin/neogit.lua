@@ -4,13 +4,16 @@ return {
         {
             "sindrets/diffview.nvim",
             lazy = false,
+            opts = {
+                use_icons = false,
+            },
         },
         { "nvim-lua/plenary.nvim", lazy = false, priority = 1000 },
     },
     init = function()
         local cmd = vim.api.nvim_create_user_command
         local autocmd = vim.api.nvim_create_autocmd
-        local group = vim.api.nvim_create_augroup("neogit", { clear = true })
+        local group = vim.api.nvim_create_augroup("plugin/neogit", { clear = true })
 
         cmd("DiffviewReview", function(opts)
             if opts.bang then
@@ -40,6 +43,7 @@ return {
     opts = {
         integrations = {
             diffview = true,
+            mini_pick = true,
         },
         sections = {
             recent = { folded = false },

@@ -1,21 +1,4 @@
-local M = {}
-
-M.Rg = function(...)
-    vim.api.nvim_exec_autocmds("QuickFixCmdPre", { pattern = "cgetexpr", modeline = false })
-
-    vim.fn.setqflist({}, " ", {
-        title = "Rg Results",
-        lines = vim.fn.systemlist {
-            "rg",
-            "--vimgrep",
-            ...,
-        },
-    })
-
-    vim.api.nvim_exec_autocmds("QuickFixCmdPost", { pattern = "cgetexpr", modeline = false })
-end
-
-M.Path = function()
+local SmartPath = function()
     local loop = vim.loop
     local res = {}
     local stdout = loop.new_pipe(false)
@@ -44,7 +27,7 @@ M.Path = function()
             table.insert(paths, v .. "/**")
         end
 
-        vim.api.nvim_set_option("path", table.concat(paths, ","))
+        vim.api.nvim_set_option_value("path", table.concat(paths, ","), {})
     end
 
     local handle
@@ -72,21 +55,10 @@ M.Path = function()
     loop.read_start(stderr, onread)
 end
 
-M.KeyListener = function(char)
-    local function toggle(c)
-        local keys = { "<CR>", "n", "N", "*", "#", "?", "/" }
-        local new_hlsearch = vim.tbl_contains(keys, c)
-
-        if vim.opt.hlsearch:get() ~= new_hlsearch then
-            vim.opt.hlsearch = new_hlsearch
-        end
-    end
-
-    local key = vim.fn.keytrans(char)
-    local mode = vim.fn.mode()
-    if mode == "n" then
-        toggle(key)
-    end
-end
-
-return M
+vim.api.nvim_create_autocmd("VimEnter", {
+    desc = "set path using fd",
+    group = vim.api.nvim_create_augroup("plugin/smart_path", { clear = true }),
+    callback = function()
+        SmartPath()
+    end,
+})

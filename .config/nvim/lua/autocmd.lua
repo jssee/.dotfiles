@@ -1,55 +1,49 @@
 local autocmd = vim.api.nvim_create_autocmd
-local group = vim.api.nvim_create_augroup("user_cmds", { clear = true })
+local augroup = vim.api.nvim_create_augroup("user_cmds", { clear = true })
 
 autocmd("TextYankPost", {
-    desc = "Highlight on yank",
-    group = group,
+    desc = "highlight on yank",
+    group = augroup,
     callback = function()
-        vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+        vim.highlight.on_yank { higroup = "Visual", timeout = 300 }
     end,
 })
 
 autocmd("FileType", {
-    desc = "Close these windows with `q`",
-    pattern = { "help", "man", "qf" },
-    group = group,
-    command = "nnoremap <buffer> q <cmd>quit<cr>",
-})
-
-autocmd("QuickFixCmdPost", {
-    desc = "Automatically open the quickfix window",
-    group = group,
-    command = "cwindow",
-    pattern = { "cgetexpr", "lgetexpr" },
+    desc = "close window with <q>",
+    group = augroup,
+    pattern = {
+        "help",
+        "qf",
+        "man",
+        "scratch",
+    },
+    callback = function(args)
+        vim.keymap.set("n", "q", [[<cmd>close<cr>]], { buffer = args.buf })
+    end,
 })
 
 autocmd("WinResized", {
-    desc = "Keep window sizes equal on resize",
-    group = group,
-    command = "wincmd =",
+    desc = "rebalance window sizes",
+    group = augroup,
+    callback = function()
+        vim.cmd.wincmd [[=]]
+    end,
 })
 
-autocmd("VimEnter", {
-    desc = "Set path using fd",
-    group = group,
+autocmd("QuickFixCmdPost", {
+    desc = "auto toggle (qf|loc)list",
+    group = augroup,
     callback = function()
-        require("functions").Path()
+        vim.cmd [[cwindow]]
     end,
+    pattern = { "cgetexpr", "lgetexpr" },
 })
 
 autocmd({ "BufRead", "BufEnter" }, {
-    group = group,
+    group = augroup,
     pattern = { "*.astro" },
     callback = function()
         vim.o.filetype = "astro"
-    end,
-})
-
-autocmd("VimEnter", {
-    group = group,
-    desc = "Remove hlsearch when no longer needed",
-    callback = function()
-        local listener = vim.api.nvim_create_namespace "key_listener"
-        vim.on_key(require("functions").KeyListener, listener)
     end,
 })
