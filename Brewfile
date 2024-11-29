@@ -1,10 +1,8 @@
 tap "homebrew/cask-versions"
 tap "homebrew/services"
-tap "cormacrelf/tap"
 
 # tools
 brew "coreutils"
-brew "dark-notify"
 brew "difftastic"
 brew "direnv"
 brew "fd"
@@ -25,12 +23,15 @@ brew "tree"
 
 # apps
 cask "1password"
+cask "1password-cli"
 cask "arc"
 cask "figma"
 cask "hiddenbar"
 cask "iina"
 cask "kap"
 cask "keepingyouawake"
+cask "obsidian"
+cask "orbstack"
 cask "raycast"
 cask "rectangle-pro"
 cask "slack"
