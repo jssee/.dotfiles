@@ -1,4 +1,3 @@
-tap "homebrew/cask-versions"
 tap "homebrew/services"
 
 # tools
@@ -25,11 +24,11 @@ brew "tree"
 cask "1password"
 cask "1password-cli"
 cask "arc"
+cals "bartender"
+cask "fantastical"
 cask "figma"
-cask "hiddenbar"
 cask "iina"
 cask "kap"
-cask "keepingyouawake"
 cask "obsidian"
 cask "orbstack"
 cask "raycast"

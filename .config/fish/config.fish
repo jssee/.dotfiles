@@ -11,7 +11,6 @@ alias showdesktop "defaults write com.apple.finder CreateDesktop -bool true && k
 alias cleanup "fd -t file -HI -g \"*DS_Store\" -x rm"
 
 abbr p "pnpm"
-abbr ld "lazydocker"
 
 if status is-interactive
     # ensure fisher and plugins are installed
@@ -37,3 +36,5 @@ end
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
