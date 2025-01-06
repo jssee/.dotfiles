@@ -1,4 +1,4 @@
-MISE_PLUGINS := node erlang elixir ruby
+MISE_PLUGINS := node erlang elixir
 FISH_PATH := grep "fish" /etc/shells
 
 .PHONY: all
