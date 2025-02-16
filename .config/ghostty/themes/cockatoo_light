@@ -1,0 +1,29 @@
+# cockatoo_light
+background = faf4ed
+foreground= 404553
+#
+# black
+palette = 0=#f0e8e2
+palette = 8=#f0e8e2
+# red
+palette = 1=#e87c69
+palette = 9=#e87c69
+# green
+palette = 2=#5F8C3F
+palette = 10=#5F8C3F
+# yellow
+palette = 3=#c88500
+palette = 11=#c88500
+# blue
+palette = 4=#97c0dc
+palette = 12=#97c0dc
+# purple
+palette = 5=#6666a8
+palette = 13=#6666a8
+# aqua
+palette = 6=#3b8f84
+palette = 14=#3b8f84
+# white
+palette = 7=#404553
+palette = 15=#404553
+
