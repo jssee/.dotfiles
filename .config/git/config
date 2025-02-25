@@ -50,16 +50,33 @@
 [branch]
   sort= -committerdate
 
+[commit]
+  verbose = true
+
 [diff]
   algorithm = histogram
   external = difft
+  colorMoved = plain
+  renames = true
+  mnemonicPrefix = true
+
+[pull]
+  rebase = true
 
 [push]
   default = current
+  autoSetupRemote = true
+
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
 
 [rebase]
   autosquash = true
   autostash = true
+  updateRefs = true
 
 [rerere]
   enabled = true
+  autoupdate = true
