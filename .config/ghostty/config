@@ -1,23 +1,12 @@
-font-size = 10
+font-size = 12
 font-family = CommitMonoSpacey
 
-theme = dark:cockatoo_dark,light:cockatoo_light
+theme = dark:kanso_ink,light:kanso_pearl
 
 window-colorspace = display-p3
 unfocused-split-opacity = 1
-# working-directory = inherit
-window-save-state = always
 
-# icon
-macos-icon = custom-style
-macos-icon-frame = plastic
-macos-icon-ghost-color = #00ff00
-
-quick-terminal-position = bottom
-quick-terminal-animation-duration = 0.15
-
-# keybinds
-keybind = global:ctrl+grave_accent=toggle_quick_terminal
+shell-integration = fish
 
 # # shaders
 # custom-shader = shaders/crt.glsl

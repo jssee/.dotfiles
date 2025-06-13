@@ -1,8 +1,7 @@
-MISE_PLUGINS := node erlang elixir
 FISH_PATH := grep "fish" /etc/shells
 
 .PHONY: all
-all: brew mise macos check_shell
+all: brew macos check_shell
 
 macos:
 	$(HOME)/.local/share/install/macos
@@ -12,10 +11,6 @@ brew:
 	brew update
 	brew upgrade
 	brew bundle
-
-mise:
-	which $@ &> /dev/null || curl https://mise.run | sh
-	for PLUGIN in $(MISE_PLUGINS); do $(HOME)/.local/bin/mise use -g $$PLUGIN; done
 
 check_shell:
 	@if [ "$$SHELL" != "$$(command -v fish)" ]; then \

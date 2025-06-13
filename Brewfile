@@ -1,6 +1,7 @@
 tap "homebrew/services"
 
 # tools
+brew "asdf"
 brew "coreutils"
 brew "difftastic"
 brew "direnv"
