@@ -20,6 +20,7 @@ brew "postgresql"
 brew "renameutils"
 brew "ripgrep"
 brew "tree"
+brew "zellij"
 
 # apps
 cask "1password"
