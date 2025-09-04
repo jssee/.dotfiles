@@ -8,7 +8,10 @@ unfocused-split-opacity = 1
 
 shell-integration = fish
 
-# # shaders
+# shaders
 # custom-shader = shaders/crt.glsl
 # custom-shader = shaders/bloom.glsl
 # custom-shader = shaders/glitchy.glsl
+# custom-shader = shaders/dotmatrix.glsl
+# custom-shader = shaders/dotmatrix_glow.glsl
+keybind = shift+enter=text:\n
