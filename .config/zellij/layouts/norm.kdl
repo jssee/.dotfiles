@@ -3,19 +3,20 @@ layout {
     children
     pane size=1 borderless=true {
       plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-        format_left   "{mode} #[bold]{tabs}"
-        format_right  "{command_git_branch} {session} {datetime}"
+        format_space  "  "
+        format_left   "{mode}"
+        format_right  "{command_git_branch} {session} #[bold]{tabs}"
         format_space  ""
 
-        mode_normal          "#[bg=normal,bold] N "
-        mode_locked          "#[fg=#ffffff,bg=magenta,bold] L "
+        mode_normal          "#[bg=limegreen,bold] N "
+        mode_locked          "#[fg=normal,bold] ♦ "
         mode_pane            "#[fg=#ffffff,bg=cyan,bold] P "
         mode_tab             "#[fg=#ffffff,bg=red,bold] T "
         mode_session         "#[fg=#ffffff,bg=blue,bold] S "
-        mode_tmux            "#[fg=#ffffff,bg=green,bold] … "
-        mode_default_to_mode "tmux"
+        mode_tmux            "#[fg=#ffffff,bg=green,bold] X "
+        mode_default_to_mode "locked"
 
-        tab_normal   "#[fg=normal] {name} "
+        tab_normal   "#[fg=normal,lightgrey] {name} "
         tab_active   "#[fg=green,bold,italic] {name} "
 
         command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
@@ -30,15 +31,19 @@ layout {
     }
   }
 
-  tab name="edit" focus=true {
+  tab name="1" focus=true {
     pane
   }
 
-  tab name="run" {
+  tab name="2" {
     pane
   }
 
-  tab name="scratch" {
+  tab name="3" {
+    pane
+  }
+
+  tab name="4" {
     pane
   }
 }

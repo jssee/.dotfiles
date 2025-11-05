@@ -6,6 +6,8 @@ theme = dark:kanso_ink,light:kanso_pearl
 window-colorspace = display-p3
 unfocused-split-opacity = 1
 
+macos-titlebar-style = tabs
+
 shell-integration = fish
 
 # shaders
