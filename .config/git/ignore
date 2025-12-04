@@ -21,6 +21,7 @@ tmp/**/*
 !.config/nvim/pack/.keep
 *.ignore.*
 .supermaven/
+.worktrees/
 
 
 
