@@ -10,8 +10,6 @@ alias hidedesktop "defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop "defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias cleanup "fd -t file -HI -g \"*DS_Store\" -x rm"
 
-abbr p "pnpm"
-
 if status is-interactive
     # ensure fisher and plugins are installed
     if not test -f $HOME/.config/fish/functions/fisher.fish
