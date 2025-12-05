@@ -22,11 +22,8 @@ defaults write com.apple.finder "NewWindowTargetPath" -string "file://${HOME}/De
 defaults write com.apple.finder "ShowStatusBar" -bool "true"
 defaults write com.apple.finder "FXPreferredViewStyle" -string "clmv"
 
-
 # dock:
 defaults write com.apple.dock "show-recents" -bool "false"
-defaults write com.apple.dock "wvous-bl-corner" -int 11
-defaults write com.apple.dock "wvous-br-corner" -int 4
 defaults write com.apple.dock "persistent-apps" -array
 defaults write com.apple.dock "autohide" -bool "true"
 

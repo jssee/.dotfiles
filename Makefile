@@ -4,7 +4,7 @@ FISH_PATH := grep "fish" /etc/shells
 all: brew macos check_shell
 
 macos:
-	$(HOME)/.local/share/install/macos
+	$(HOME)/.local/bin/setup_macos
 
 brew:
 	which $@ &> /dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
