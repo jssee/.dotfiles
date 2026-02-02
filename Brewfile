@@ -1,4 +1,3 @@
-tap "homebrew/services"
 tap "nvie/tap"
 
 # tools
