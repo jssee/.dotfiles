@@ -5,11 +5,11 @@ layout {
       plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
         format_space  "  "
         format_left   "{mode}"
-        format_right  "{command_git_branch} {session} #[bold]{tabs}"
-        format_space  ""
+        format_right  "{command_git_branch} {session} "
+        format_space  " "
 
-        mode_normal          "#[bg=limegreen,bold] N "
-        mode_locked          "#[fg=normal,bold] ♦ "
+        mode_normal          "#[fg=#b15c00,bold] N "
+        mode_locked          "#[fg=#ffffff,bg=#b15c00,bold] И "
         mode_pane            "#[fg=#ffffff,bg=cyan,bold] P "
         mode_tab             "#[fg=#ffffff,bg=red,bold] T "
         mode_session         "#[fg=#ffffff,bg=blue,bold] S "
@@ -23,27 +23,19 @@ layout {
         command_git_branch_format      "#[fg=magenta] {stdout} "
         command_git_branch_interval    "10"
         command_git_branch_rendermode  "static"
-
-        datetime        "#[fg=lightgrey,bold] {format} "
-        datetime_format "%A, %d %b %Y %H:%M"
-        datetime_timezone "America/New_York"
       }
     }
   }
 
-  tab name="1" focus=true {
+  tab name="edit" focus=true {
     pane
   }
 
-  tab name="2" {
+  tab name="run" {
     pane
   }
 
-  tab name="3" {
-    pane
-  }
-
-  tab name="4" {
+  tab name="scratch" {
     pane
   }
 }
