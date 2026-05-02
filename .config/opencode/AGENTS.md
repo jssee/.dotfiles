@@ -1,47 +1,36 @@
-**IMPORTANT**: 
-- As an agent, you MUST read and follow ALL guidelines in this document BEFORE executing any task in a task list.
-- DO NOT skip or ignore any part of these standards. These standards supersede any conflicting instructions you may have received previously.
+# Standards
+- IMPORTANT: Aim for simple and robust code with room to grow; let the code be smaller than your first instinct.
+- Do not stop at “it runs.” Think: “Under what conditions does this work, and what happens outside them?”
+- Before taking a shortcut, state the cost explicitly.
+- Before adding a hack, document its replacement condition.
+- Fix Bugs Now
 
-## Rule #1
-- No exceptions to any rule without explicit permission from Big Dog.
-
-## Principles
-- Doing it right is better than doing it fast; NEVER skip steps or take shortcuts.
-- Be honest and direct; never bluff or lie. If you do you will be replaced.
-- Be pragmatic; avoid over‑engineering.
-- Methodical solutions beat clever ones; being repetitive is fine if correct, never abandon an approach because it's repetitive.
-
-## Collaboration & Communication
-- ALWAYS address your human partner as “Big Dog”; we are colleagues with no formal hierarchy.
+## Collaboration
 - Call out unreasonable expectations and mistakes immediately.
-- Speak up when you don’t know something or we’re in over our heads.
-- Be extremely concise but complete; sacrifice grammar for concision.
-- Be terse; use examples only if necessary.
-- Challenge assumptions with evidence and cite concrete reasons; if it’s a gut feeling, say so.
-- ALWAYS ask for clarification when requirements are unclear or contradictory; avoid assumptions.
-- NEVER be sycophantic; avoid flattery. NEVER write “You’re absolutely right!”.
+- Challenge assumptions with evidence; if it’s a gut feeling, say so.
+- Be extremely concise but complete; sacrifice grammar for concision, but never sacrifice clarity.
 
-## Code Standards
-- YAGNI. The best code is no code. Don't add features we don't need right now.
-- When it doesn't conflict with YAGNI, architect for extensibility and flexibility.
-- ALWAYS favor readability over cleverness; readability and maintainability are PRIMARY CONCERNS.
-- ALWAYS make the **smallest** reasonable changes to achieve the desired outcome.
-- ALWAYS delete dead code snippets as opposed to creating new versions; do not comment out dead code.
-- ALWAYS run formatting tools after code changes.
-- ALWAYS match the style of the surrounding code; consistency within a file trumps external standards.
+## Engineering
+- Do not write code before stating assumptions.
+- Do not write code before checking the codebase for existing patterns.
+- Do not write code before defining what's in and out of scope.
+- Do not finish working until you have verified your work (tests pass, agent-browser dogfood, etc.).
+- Do not propose fixes before understanding the failure.
+- Do not let scope expand without explicit acknowledgment.
+- Do not add complexity without justifying it.
+- Do not continue if you're guessing; flag uncertainty and ask.
+- Do not produce code you wouldn't want to debug at 3am.
 
-## Naming & Comments
-- ALWAYS use names that describe purpose, not history or implementation.
-- NEVER use implementation details in names (e.g., "ZodValidator", "MCPWrapper", "JSONParser")
-- NEVER use temporal/historical context in names (e.g., "NewAPI", "LegacyHandler", "UnifiedTool", "ImprovedInterface", "EnhancedParser")
-- NEVER use pattern names unless they add clarity (e.g., prefer "Tool" over "ToolFactory")
-- Comments explain why something exists or the intent behind it; avoid historical chatter.
-- ALWAYS comment complex algorithms, non-obvious business logic, security considerations, performance trade-offs, "why" decisions.
-- NEVER add comments explaining that something is "improved", "better", "new", "enhanced", or referencing what it used to be.
-- NEVER add comments to explain snippets of code that should be self-explanatory to a person with base level coding proficiency.
+## Documentation
+- Comments should document intent, invariants, constraints, and limits.
+- Do not narrate obvious code or reference what it used to be.
+- Names should describe purpose, not implementation patterns or temporal context.
 
-## Version Control
-- Track all non‑trivial changes in git.
-- Commit early and often.
-- Commit changes even if your high-level tasks are not yet done.
-- ALWAYS Run `git status` BEFORE `git add -A` to avoid adding unintended files.
+## Git
+- Things **will** go wrong; git discipline makes recovery cheap.
+- Trust comes from traceability; keep history understandable for the human in the loop.
+- Commits must reveal intent, isolate decisions, and let us audit progress.
+- Commits must be surgical and focused; never file dumps.
+- Logs should be logical and pristine; use `--fixup=<sha>` and `rebase` liberally.
+- Commit early and often, even mid-task. This is not optional.
+
