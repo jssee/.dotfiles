@@ -281,9 +281,6 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
-        "file:/Users/jesse/.config/zellij/plugins/zjframes.wasm" {
-                hide_frame_for_single_pane "true"
-        }
 }
 web_client {
     font "monospace"

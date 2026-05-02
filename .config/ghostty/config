@@ -16,4 +16,3 @@ shell-integration = fish
 # custom-shader = shaders/glitchy.glsl
 # custom-shader = shaders/dotmatrix.glsl
 # custom-shader = shaders/dotmatrix_glow.glsl
-keybind = shift+enter=text:\n
