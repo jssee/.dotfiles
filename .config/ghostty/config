@@ -9,6 +9,14 @@ unfocused-split-opacity = 1
 macos-titlebar-style = tabs
 
 shell-integration = fish
+window-padding-x = 8
+window-padding-y = 10
+
+quick-terminal-autohide = false
+quick-terminal-size = 100%,100%
+quick-terminal-keyboard-interactivity = exclusive
+
+keybind = global:cmd+backquote=toggle_quick_terminal
 
 # shaders
 # custom-shader = shaders/crt.glsl
