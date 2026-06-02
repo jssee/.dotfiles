@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_url="${DOTFILES_REPO_URL:-https://github.com/jssee/.dotfiles.git}"
+dotfiles_dir="$HOME/.dotfiles"
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "bootstrap: macOS only" >&2
+  exit 1
+fi
+
+for cmd in git rsync; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "bootstrap: missing required command: $cmd" >&2
+    exit 1
+  fi
+done
+
+if [[ -e "$dotfiles_dir" ]]; then
+  echo "bootstrap: $dotfiles_dir already exists; aborting" >&2
+  exit 1
+fi
+
+tmp="$(mktemp -d "${TMPDIR:-/tmp}/dotfiles.XXXXXX")"
+trap 'rm -rf "$tmp"' EXIT
+worktree="$tmp/worktree"
+
+git clone --separate-git-dir="$dotfiles_dir" "$repo_url" "$worktree"
+
+rsync --archive --verbose \
+  --exclude ".git" \
+  --backup --suffix ".dotfiles.bak" \
+  "$worktree/" "$HOME/"
+
+(
+  cd "$HOME"
+  git --git-dir="$dotfiles_dir" submodule update --init --recursive
+)
+
+git --git-dir="$dotfiles_dir" config status.showUntrackedFiles no
+
+echo "bootstrap: dotfiles installed"
+echo "bootstrap: run 'make' from $HOME when ready for machine setup"
