@@ -19,6 +19,7 @@ tmp/**/*
 .dotfiles
 .config/nvim/pack/*
 !.config/nvim/pack/.keep
+.config/opencode/
 *.ignore.*
 .supermaven/
 .worktrees/
