@@ -19,13 +19,10 @@ found that matches the given name.
 
 Will copy over any .env, .envrc, or .tool-versions files to the new worktree
 EOF
-    kill -INT $$
 }
 
 function die {
     printf '%b%s%b\n' "$RED" "$1" "$CLEAR"
-    # exit the script, but if it was sourced, don't kill the shell
-    kill -INT $$
 }
 
 function warn {
@@ -62,6 +59,7 @@ function cp_cow {
 function _worktree {
     if [ -z "$1" ]; then
         usage
+        return 2
     fi
 
     if [ -n "$VERBOSE" ]; then
@@ -90,19 +88,22 @@ function _worktree {
     # enough :shrug:
     #
     # if the branch exists locally:
-    if git for-each-ref --format='%(refname:lstrip=2)' refs/heads | grep -E "^$branchname$" > /dev/null 2>&1; then
+    if git for-each-ref --format='%(refname:lstrip=2)' refs/heads | grep -Fx -- "$branchname" > /dev/null 2>&1; then
         if ! git worktree add "../$dirname" "$branchname"; then
             die "failed to create git worktree $branchname"
+            return 1
         fi
     # if the branch exists on a remote:
-    elif git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin | grep -E "^$branchname$" > /dev/null 2>&1; then
+    elif git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin | grep -Fx -- "$branchname" > /dev/null 2>&1; then
         if ! git worktree add "../$dirname" "$branchname"; then
             die "failed to create git worktree $branchname"
+            return 1
         fi
     else
         # otherwise, create a new branch
         if ! git worktree add -b "$branchname" "../$dirname"; then
             die "failed to create git worktree $branchname"
+            return 1
         fi
     fi
 
@@ -115,31 +116,16 @@ function _worktree {
     fi
 
     # this will fail for any files with \n in their names. don't do that.
-    IFS=$'\n'
-
-    # (XXX: should I add some mechanism for users to spcify this list? perhaps
-    # ~/.config/worktree/untracked or something?)
-    #
-    # this is the best of a bunch of bad options for reading the files into an
-    # array. We're often executing in bash or zsh, so we're going to let them
-    # use their file splitting rules, with an explicit IFS. We can't use find's
-    # exec because we want to use cp_cow to copy files copy-on-write when
-    # possible.
-    #
     # Skip any of these files if they're found within node_modules.
-    #
-    # Putting the `-not -path` argument first is a great deal faster than the
-    # other way around
-    #
-    # shellcheck disable=SC2207
-    files_to_copy=( $(find -E . -not -path '*node_modules*' -and \
-        -iregex '.*\/\.(envrc|env|env.local|tool-versions|mise.toml)' ) )
-    for f in "${files_to_copy[@]}"; do
+    while IFS= read -r f; do
       cp_cow "$f" ../"$dirname"/"$f"
-    done
-
-    # return the shell to normal splitting mode
-    unset IFS
+    done < <(find . -not -path '*node_modules*' \( \
+        -iname '.envrc' -o \
+        -iname '.env' -o \
+        -iname '.env.local' -o \
+        -iname '.tool-versions' -o \
+        -iname '.mise.toml' \
+    \))
 
     # if there was an envrc file, tell direnv that it's ok to run it
     if [ -f "../$dirname/.envrc" ]; then
@@ -155,6 +141,7 @@ while true; do
     case $1 in
         help | -h | --help)
             usage
+            return 0 2>/dev/null || exit 0
             ;;
         -v | --verbose)
             VERBOSE=true
