@@ -23,6 +23,31 @@ trap 'kill "$sudo_keepalive_pid" 2>/dev/null || true' EXIT
 defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerDrag" -bool "true"
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "Clicking" -bool "true"
 
+# keyboard:
+caps_lock=30064771129
+control=30064771300
+{
+  defaults -currentHost read -g 2>/dev/null |
+    sed -n 's/.*"com\.apple\.keyboard\.modifiermapping\.\([0-9][0-9]*-[0-9][0-9]*-0\)".*/\1/p'
+  hidutil list |
+    awk 'NR > 1 && $1 != "0x0" && $2 != "0x0" && $4 == "1" && $5 == "6" { print $1, $2 }' |
+    while read -r vendor_id product_id; do
+      printf '%s-%s-0\n' "$((vendor_id))" "$((product_id))"
+    done
+} | sort -u |
+  while read -r keyboard_id; do
+    defaults -currentHost write -g "com.apple.keyboard.modifiermapping.${keyboard_id}" -array \
+      "<dict><key>HIDKeyboardModifierMappingDst</key><integer>${control}</integer><key>HIDKeyboardModifierMappingSrc</key><integer>${caps_lock}</integer></dict>"
+  done
+
+# shortcuts:
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
+  '<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>'
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 65 \
+  '<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1572864</integer></array><key>type</key><string>standard</string></dict></dict>'
+defaults write com.brnbw.Tuna "FuzzyModeTriggerType" -string "shortcut"
+defaults write com.brnbw.Tuna "KeyboardShortcuts_fuzzyMode" -string '{"carbonKeyCode":49,"carbonModifiers":256}'
+
 # finder:
 defaults write com.apple.finder "ShowPathbar" -bool "true"
 defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"
