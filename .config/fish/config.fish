@@ -2,7 +2,22 @@ set fish_greeting
 
 set -gx EDITOR nvim
 
-alias l "gls -la --color --group-directories-first --file-type"
+if command -q brew
+    eval (brew shellenv)
+else
+    for brew in /opt/homebrew/bin/brew /usr/local/bin/brew
+        if test -x $brew
+            eval ($brew shellenv)
+            break
+        end
+    end
+end
+
+if command -q gls
+    alias l "gls -la --color --group-directories-first --file-type"
+else
+    alias l "ls -la"
+end
 alias dg "$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias show "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
@@ -14,7 +29,7 @@ if status is-interactive
     # ensure fisher and plugins are installed
     if not test -f $HOME/.config/fish/functions/fisher.fish
         echo "🎣 installing fisher..."
-        curl -sLo $HOME/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+        curl -fsSLo "$HOME/.config/fish/functions/fisher.fish" --create-dirs https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish
         fisher
     end
 
@@ -44,5 +59,3 @@ end
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
