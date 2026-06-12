@@ -1,6 +1,6 @@
 [user]
   name = Jesse Hoyos
-  email = jesse@mojotech.com
+  email = jsshoyos@gmail.com
 
 [alias]
   aliases = config --get-regexp alias
