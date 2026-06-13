@@ -1,4 +1,4 @@
-tap "nvie/tap"
+tap "nvie/tap", trusted: true
 
 # tools
 brew "asdf"
@@ -26,6 +26,7 @@ brew "openssl"
 brew "postgresql@14", restart_service: :changed
 brew "renameutils"
 brew "ripgrep"
+brew "tailscale"
 brew "tree"
 brew "zellij"
 
@@ -40,6 +41,7 @@ cask "ghostty"
 cask "orbstack"
 cask "rectangle-pro"
 cask "slack"
+cask "tailscale"
 cask "thebrowsercompany-dia"
 cask "tuna"
 cask "utm"
