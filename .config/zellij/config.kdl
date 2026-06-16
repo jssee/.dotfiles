@@ -303,22 +303,22 @@ simplified_ui true
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "tokyonight_day"
+theme "ember"
 themes {
-    tokyonight_day {
-        fg "#3760bf"
-        bg "#c4c8da"
+    ember {
+        fg "#d8d0c0"
+        bg "#1c1b19"
         // Black should match the terminal background color
         // This ensures the top and bottom bars are transparent
-        black "#e1e2e7"
-        red "#f52a65"
-        green "#587539"
-        yellow "#8c6c3e"
-        blue "#2e7de9"
-        magenta "#9854f1"
-        cyan "#007197"
-        white "#6172b0"
-        orange "#b15c00"
+        black "#1c1b19"
+        red "#e08060"
+        green "#8a9868"
+        yellow "#c8b468"
+        blue "#7890a0"
+        magenta "#988090"
+        cyan "#80a090"
+        white "#d8d0c0"
+        orange "#c09058"
     }
 }
  
