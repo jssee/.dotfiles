@@ -1,8 +1,8 @@
 # Fuzzy find & edit
 function e
-  if test (count $argv) -gt 0
-    command $EDITOR $argv
-  else
-    fd -t f | fzy | xargs $EDITOR
-  end
+    if set -q argv[1]
+        command $EDITOR -- $argv
+    else if set -l file (fd --type file | fzy)
+        command $EDITOR -- $file
+    end
 end

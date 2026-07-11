@@ -2,23 +2,14 @@ set fish_greeting
 
 set -gx EDITOR nvim
 
-if command -q brew
-    eval (brew shellenv)
-else
-    for brew in /opt/homebrew/bin/brew /usr/local/bin/brew
-        if test -x $brew
-            eval ($brew shellenv)
-            break
-        end
-    end
-end
+fish_add_path --global /opt/homebrew/bin /opt/homebrew/sbin
 
 if command -q gls
     alias l "gls -la --color --group-directories-first --file-type"
 else
     alias l "ls -la"
 end
-alias dg "$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dg "command git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias show "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 alias hidedesktop "defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
@@ -51,11 +42,6 @@ if status is-interactive
     end
     set --erase _asdf_shims
 
-    set hydro_fetch true
     set hydro_color_git magenta
     set hydro_color_duration yellow
 end
-
-# tabtab source for packages
-# uninstall by removing these lines
-[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
