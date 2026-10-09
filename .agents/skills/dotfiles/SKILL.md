@@ -21,7 +21,7 @@ Run `make -C ~ check` after each edit. It prints `OK|WARN|ERROR` lines like `:ch
 
 | What | Path |
 |---|---|
-| Packages | `~/Brewfile` (`make brew`) |
+| Packages | `~/.homebrew/Brewfile` (`make brew`) |
 | macOS defaults | `~/.local/bin/setup_macos` (`make macos`) |
 | New machine | `~/.local/bin/bootstrap`, then `make` |
 | Tool-owned ignores | `~/.gitignore` (dotfiles repo only) |

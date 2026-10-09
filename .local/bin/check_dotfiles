@@ -73,7 +73,7 @@ check_homebrew() {
     return
   fi
 
-  local brewfile="$HOME/Brewfile" drift=0 line
+  local brewfile="$HOME/.homebrew/Brewfile" drift=0 line
   # brew and cask lines use full names for tap packages, as brew lists them.
   # Extra formulae count only leaves installed on request, not dependencies.
   while IFS= read -r line; do

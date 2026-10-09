@@ -25,7 +25,7 @@ brew:
 	eval "$$($$brew_path shellenv)"; \
 	brew update; \
 	brew upgrade; \
-	brew bundle
+	brew bundle --global
 
 shell:
 	@fish_path="$$(command -v fish)"; \

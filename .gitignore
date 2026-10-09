@@ -29,3 +29,7 @@
 /.local/bin/tuna
 /.local/bin/uv
 /.local/bin/uvx
+
+# Homebrew: taps and packages trusted on this machine
+/.homebrew/trust.json
+/.homebrew/trust.json.lock
