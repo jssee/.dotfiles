@@ -25,7 +25,11 @@ is_merge() {
 cd_to_toplevel
 
 # Only if we are clean
-require_clean_work_tree $cmd
+require_clean_work_tree prev
+
+# Linked worktrees keep rebase state outside .git/, so ask git where it lives.
+rebase_apply=$(git rev-parse --git-path rebase-apply)
+rebase_merge=$(git rev-parse --git-path rebase-merge)
 
 if ! has_parent "HEAD"; then
     echo "At bottom"
@@ -36,13 +40,13 @@ fi
 is_merge "HEAD" && die "HEAD is a merge commit, which is unsupported"
 
 # Not if we are in a non-interactive rebase
-test -d ".git/rebase-apply" && die "Non-interactive rebase is unsupported"
+test -d "$rebase_apply" && die "Non-interactive rebase is unsupported"
 
 # If we're not in an interactive rebase, start one on the current commit
-if ! test -d ".git/rebase-merge"; then
+if ! test -d "$rebase_merge"; then
     # Redirect to null to suppress the annoying "You can amend the commit now" message.
     GIT_SEQUENCE_EDITOR="$IN_PLACE_SED 's/^pick/edit/'" git rebase --quiet -i HEAD^ 2>/dev/null
-    test -d ".git/rebase-merge" || die "Failed to start interactive rebase"
+    test -d "$rebase_merge" || die "Failed to start interactive rebase"
 fi
 
 for ((iter=0;iter<${1:-1};iter++)); do
