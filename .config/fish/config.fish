@@ -3,6 +3,7 @@ set fish_greeting
 set -gx EDITOR nvim
 
 fish_add_path --global /opt/homebrew/bin /opt/homebrew/sbin
+fish_add_path --global ~/.local/bin
 
 # ASDF configuration code
 if test -z $ASDF_DATA_DIR
