@@ -1,5 +1,9 @@
-.PHONY: all
+.PHONY: all brew macos shell check
 all: brew macos shell
+
+# Report what is broken or has drifted, like nvim's :checkhealth.
+check:
+	@$(HOME)/.local/bin/check_dotfiles
 
 macos:
 	$(HOME)/.local/bin/setup_macos

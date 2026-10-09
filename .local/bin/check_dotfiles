@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# check_dotfiles - report the health of this machine's setup, like nvim's
+# :checkhealth. `make check` runs it.
+#
+# Prints "OK|WARN|ERROR <finding>" lines grouped by section, then a summary.
+# Exits 1 on any ERROR, which means something is broken. A WARN is drift you
+# may intend, such as a package installed to try out.
+#
+# Written for macOS's bash 3.2, which runs it before Homebrew's bash exists.
+set -uo pipefail
+
+errors=0
+warnings=0
+
+section() { printf '\n%s\n' "$1"; }
+ok() { printf 'OK    %s\n' "$1"; }
+warn() {
+  printf 'WARN  %s\n' "$1"
+  warnings=$((warnings + 1))
+}
+# error <finding> [details], with details indented beneath the finding.
+error() {
+  printf 'ERROR %s\n' "$1"
+  if [[ -n ${2-} ]]; then printf '%s\n' "$2" | sed 's/^/      /'; fi
+  errors=$((errors + 1))
+}
+
+tracked() { git -C "$HOME" --git-dir="$HOME/.dotfiles" --work-tree="$HOME" ls-files "$@"; }
+
+check_configs() {
+  section configs
+  cd "$HOME" || return
+
+  # Syntax only: tracked fish files, and scripts by their shebang.
+  local file out cmd=() parsed=0 broken=0
+  while IFS= read -r file; do
+    case $file in
+      *.fish) cmd=(fish --no-execute "$file") ;;
+      .local/bin/*)
+        case $(head -n1 "$file") in
+          *bash*) cmd=(bash -n "$file") ;;
+          *sh) cmd=(sh -n "$file") ;;
+          *) continue ;;
+        esac ;;
+      *) continue ;;
+    esac
+    if [[ ${cmd[0]} == fish ]] && ! command -v fish >/dev/null; then
+      warn "$file: fish is not installed, skipped"
+    elif out=$("${cmd[@]}" 2>&1); then
+      parsed=$((parsed + 1))
+    else
+      error "$file does not parse" "$out"
+      broken=$((broken + 1))
+    fi
+  done < <(tracked)
+  if [[ $broken -eq 0 ]]; then ok "$parsed fish files and scripts parse"; fi
+
+  # Ghostty loads the config as it would at startup, so this also catches
+  # unknown keys and themes that do not exist.
+  if ! command -v ghostty >/dev/null; then
+    warn "ghostty is not installed, config skipped"
+  elif out=$(ghostty +validate-config 2>&1); then
+    ok "ghostty config is valid"
+  else
+    error "ghostty config is invalid" "$out"
+  fi
+}
+
+check_homebrew() {
+  section homebrew
+  if ! command -v brew >/dev/null; then
+    warn "brew is not installed; run make brew"
+    return
+  fi
+
+  local brewfile="$HOME/Brewfile" drift=0 line
+  # brew and cask lines use full names for tap packages, as brew lists them.
+  # Extra formulae count only leaves installed on request, not dependencies.
+  while IFS= read -r line; do
+    warn "$line"
+    drift=1
+  done < <(
+    export LC_ALL=C
+    brews() { sed -n 's/^brew "\([^"]*\)".*/\1/p' "$brewfile" | sort; }
+    casks() { sed -n 's/^cask "\([^"]*\)".*/\1/p' "$brewfile" | sort; }
+    comm -23 <(brews) <(brew list --formula --full-name | sort) | sed 's/^/not installed: formula /'
+    comm -23 <(casks) <(brew list --cask --full-name | sort) | sed 's/^/not installed: cask /'
+    comm -13 <(brews) <(brew leaves --installed-on-request | sort) | sed 's/^/not in Brewfile: formula /'
+    comm -13 <(casks) <(brew list --cask --full-name | sort) | sed 's/^/not in Brewfile: cask /'
+  )
+  if [[ $drift -eq 0 ]]; then ok "installed packages match the Brewfile"; fi
+}
+
+check_shell() {
+  section shell
+  local login fish
+  login=$(dscl . -read "/Users/$USER" UserShell | awk '{ print $2 }')
+  fish=$(command -v fish)
+  if [[ -n $fish && $login == "$fish" ]]; then
+    ok "login shell is fish"
+  else
+    warn "login shell is ${login:-unknown}, not fish; run make shell"
+  fi
+}
+
+check_configs
+check_homebrew
+check_shell
+
+printf '\n%d errors, %d warnings\n' "$errors" "$warnings"
+[[ $errors -eq 0 ]]
