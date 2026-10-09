@@ -14,7 +14,7 @@
   sw = switch
 
   c = commit
-  cc = "!git add --all && git commit -av" 
+  cc = "!git add --all && git commit"
   extend = commit --amend --reuse-message=HEAD
   undo = reset --soft @~
 
@@ -33,7 +33,7 @@
   wl = worktree list
 
   z = stash
-  zz = stash save -u
+  zz = stash push -u
 
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
   s = status --short --branch
@@ -42,7 +42,6 @@
   unhide = update-index --no-assume-unchanged
 
   up = "!up() { git push -u origin \"$(git symbolic-ref --short HEAD)\"; }; up"
-  go = "!go() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; go"
   trim = "!t() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; t"
 
 [init]
