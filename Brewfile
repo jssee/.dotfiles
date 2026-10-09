@@ -28,7 +28,6 @@ brew "renameutils"
 brew "ripgrep"
 brew "tailscale"
 brew "tree"
-brew "zellij"
 
 # apps
 cask "1password"
