@@ -4,27 +4,13 @@
 .bundle
 .byebug_history
 .env
-.git/
 /bower_components/
-/log
 /node_modules/
-/tmp
-/vendor
-db/*.sqlite3
-log/*.log
-rerun.txt
-tmp/**/*
 /tags
-.tool_versions
 .dotfiles
-.config/nvim/pack/*
-!.config/nvim/pack/.keep
 .config/opencode/
 *.ignore.*
 .supermaven/
 .worktrees/
-
-
-
 
 **/.claude/settings.local.json
