@@ -19,19 +19,16 @@ dots() { git -C "$HOME" --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"; }
 tracked() { dots -c core.quotePath=false ls-files --format='%(objectmode)%x09%(path)'; }
 
 overview() {
-  # status.showUntrackedFiles is off because $HOME holds everything. Scan only
-  # directories that already hold tracked files, so a new file beside them
-  # (a theme, a script) shows up. Top-level files and submodules are named
-  # directly to keep the rest of $HOME out.
-  local paths=() mode path
+  dots status --short --branch
+
+  # status.showUntrackedFiles is off because $HOME holds everything. List
+  # untracked files only in directories that already hold tracked files, so a
+  # new file beside them (a theme, a script) shows up.
+  local dirs=() mode path
   while IFS=$'\t' read -r mode path; do
-    if [[ $mode == 160000* || $path != */* ]]; then
-      paths+=("$path")
-    else
-      paths+=("${path%/*}")
-    fi
+    if [[ $mode != 160000* && $path == */* ]]; then dirs+=("${path%/*}"); fi
   done < <(tracked)
-  dots status --short --branch --untracked-files=normal -- "${paths[@]}"
+  dots ls-files --others --exclude-standard --directory --no-empty-directory -- "${dirs[@]}" | sed 's/^/?? /'
 }
 
 edit() {
