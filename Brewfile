@@ -26,7 +26,6 @@ brew "openssl"
 brew "postgresql@14", restart_service: :changed
 brew "renameutils"
 brew "ripgrep"
-brew "tailscale"
 brew "tree"
 
 # apps
@@ -38,7 +37,7 @@ cask "ghostty"
 cask "orbstack"
 cask "rectangle-pro"
 cask "slack"
-cask "tailscale"
+cask "tailscale-app"
 cask "thebrowsercompany-dia"
 cask "tuna"
 cask "utm"
