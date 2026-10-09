@@ -1,0 +1,31 @@
+# Ignores for the dotfiles repo only: `dots` lists untracked files beside tracked
+# ones, and these are owned by tools. Patterns are anchored to $HOME, so they
+# can never match inside another repo.
+
+# fish: state, fisher plugins from fish_plugins, and tool-installed completions
+/.config/fish/fish_variables
+/.config/fish/functions/fisher.fish
+/.config/fish/functions/__z*.fish
+/.config/fish/functions/_autopair_*.fish
+/.config/fish/functions/fish_prompt.fish
+/.config/fish/functions/fish_mode_prompt.fish
+/.config/fish/conf.d/autopair.fish
+/.config/fish/conf.d/hydro.fish
+/.config/fish/conf.d/z.fish
+/.config/fish/conf.d/steel.fish
+/.config/fish/completions/bun.fish
+/.config/fish/completions/docker.fish
+/.config/fish/completions/kubectl.fish
+/.config/fish/completions/orbctl.fish
+/.config/fish/completions/steel.fish
+
+# .local/bin: binaries and links from installers
+/.local/bin/amp
+/.local/bin/claude
+/.local/bin/git-hunk
+/.local/bin/pi
+/.local/bin/plannotator
+/.local/bin/python3.11
+/.local/bin/tuna
+/.local/bin/uv
+/.local/bin/uvx
