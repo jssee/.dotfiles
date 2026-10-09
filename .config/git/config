@@ -62,7 +62,7 @@
   mnemonicPrefix = true
 
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 
 [merge "mergiraf"]
   name = mergiraf
