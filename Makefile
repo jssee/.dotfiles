@@ -1,5 +1,5 @@
-.PHONY: all brew macos shell check
-all: brew macos shell
+.PHONY: all brew macos shell nvim check
+all: brew macos shell nvim
 
 # Report what is broken or has drifted, like nvim's :checkhealth.
 check:
@@ -7,6 +7,9 @@ check:
 
 macos:
 	$(HOME)/.local/bin/setup_macos
+
+nvim:
+	@$(HOME)/.local/bin/setup_nvim
 
 brew:
 	@if ! command -v brew >/dev/null 2>&1; then \

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# setup_nvim - bring the nvim config up to date and record it in the dotfiles.
+# `make nvim` runs it.
+#
+# ~/.config/nvim is a submodule: its own repo (github.com/jssee/nvim), which
+# the dotfiles pin to one commit.
+set -euo pipefail
+
+nvim_dir="$HOME/.config/nvim"
+dots() { git -C "$HOME" --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"; }
+nvim_git() { git -C "$nvim_dir" "$@"; }
+
+# Clone it on a new machine. Only when missing: on an existing checkout,
+# submodule update would reset it to the pinned commit.
+if [[ ! -e $nvim_dir/.git ]]; then
+  dots submodule update --init -- .config/nvim
+fi
+
+# Submodules check out detached at the pinned commit. Work on main instead,
+# so edits can be committed and pushed. Leave any other branch alone.
+case $(nvim_git branch --show-current) in
+  main) ;;
+  "") nvim_git switch --quiet main ;;
+  *)
+    echo "nvim is on branch $(nvim_git branch --show-current); switch to main, then run make nvim again" >&2
+    exit 1 ;;
+esac
+nvim_git pull --quiet --rebase --autostash
+
+# Pin the new commit, but only once it is on GitHub, since that is the only
+# place another machine can check it out from.
+if dots diff --quiet --ignore-submodules=dirty -- .config/nvim; then
+  echo "nvim is up to date"
+elif nvim_git merge-base --is-ancestor HEAD origin/main; then
+  dots commit --quiet -m "chore: update nvim" -- .config/nvim
+  echo "pinned nvim at $(nvim_git log -1 --format='%h %s'); push the dotfiles to share it"
+else
+  echo "nvim has unpushed commits; push them, then run make nvim again" >&2
+  exit 1
+fi

@@ -13,7 +13,7 @@ Run `make -C ~ check` after each edit. It prints `OK|WARN|ERROR` lines like `:ch
 
 - `diff.external` is difftastic. Pass `--no-ext-diff` to `dots diff`, `dots show`, and `dots log -p` to get a patch.
 - `status.showUntrackedFiles` is off. A new file is invisible to `dots status`; run `dots` to see it, then `dots add` it or add an anchored pattern to `~/.gitignore` if a tool owns it.
-- `~/.config/nvim` is a submodule (github.com/jssee/nvim). Commit inside it with `git -C ~/.config/nvim`, push it, then record the new pointer with `dots add .config/nvim` as `chore: update nvim`.
+- `~/.config/nvim` is a submodule (github.com/jssee/nvim). Commit inside it with `git -C ~/.config/nvim` and push it; then `make -C ~ nvim` pulls it and commits the new pin as `chore: update nvim`.
 - Tools append machine-specific lines to tracked files (e.g. amp's credential helper in `.config/git/config`). Leave them uncommitted; stage around them.
 - A work and a personal machine both push here. `dots fetch` and rebase before pushing.
 
