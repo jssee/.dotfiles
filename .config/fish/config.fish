@@ -4,6 +4,20 @@ set -gx EDITOR nvim
 
 fish_add_path --global /opt/homebrew/bin /opt/homebrew/sbin
 
+# ASDF configuration code
+if test -z $ASDF_DATA_DIR
+    set _asdf_shims "$HOME/.asdf/shims"
+else
+    set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+if not contains $_asdf_shims $PATH
+    set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
+
 if command -q gls
     alias l "gls -la --color --group-directories-first --file-type"
 else
@@ -27,20 +41,6 @@ if status is-interactive
     if type -q direnv
         direnv hook fish | source
     end
-
-    # ASDF configuration code
-    if test -z $ASDF_DATA_DIR
-        set _asdf_shims "$HOME/.asdf/shims"
-    else
-        set _asdf_shims "$ASDF_DATA_DIR/shims"
-    end
-
-    # Do not use fish_add_path (added in Fish 3.2) because it
-    # potentially changes the order of items in PATH
-    if not contains $_asdf_shims $PATH
-        set -gx --prepend PATH $_asdf_shims
-    end
-    set --erase _asdf_shims
 
     set hydro_color_git magenta
     set hydro_color_duration yellow
