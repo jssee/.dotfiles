@@ -1,5 +1,5 @@
 .PHONY: all
-all: brew macos check_shell
+all: brew macos shell
 
 macos:
 	$(HOME)/.local/bin/setup_macos
@@ -23,7 +23,7 @@ brew:
 	brew upgrade; \
 	brew bundle
 
-check_shell:
+shell:
 	@fish_path="$$(command -v fish)"; \
 	if [ -z "$$fish_path" ]; then \
 		echo "fish not found; run 'make brew' first" >&2; \
