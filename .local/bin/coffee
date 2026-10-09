@@ -55,8 +55,7 @@ stop_session() {
         fi
         rm -f "$PIDFILE"
     else
-        # Try to kill any caffeinate started by us
-        pkill -f "caffeinate" 2>/dev/null && echo "Session ended" || echo "No active session"
+        echo "No active session"
     fi
 }
 
