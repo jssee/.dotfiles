@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# dots - git for the dotfiles repo, run from ~ wherever you are.
+#
+#   dots               overview: branch, changed files, and new files beside tracked ones
+#   dots edit [query]  pick a tracked file with fzy and open it in $EDITOR
+#   dots <git args>    anything else runs as git on the dotfiles repo
+#
+# The repo is a bare git dir at ~/.dotfiles whose work tree is $HOME. Paths
+# are always relative to ~, as the overview prints them, so `dots add
+# .config/fish/config.fish` works from any directory.
+#
+# A script, not a fish function, so agents running bash can use it too.
+# Written for macOS's bash 3.2, which runs it before Homebrew's bash exists.
+set -euo pipefail
+
+dots() { git -C "$HOME" --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"; }
+
+# Prints each tracked path as "<mode><TAB><path>".
+tracked() { dots -c core.quotePath=false ls-files --format='%(objectmode)%x09%(path)'; }
+
+overview() {
+  # status.showUntrackedFiles is off because $HOME holds everything. Scan only
+  # directories that already hold tracked files, so a new file beside them
+  # (a theme, a script) shows up. Top-level files and submodules are named
+  # directly to keep the rest of $HOME out.
+  local paths=() mode path
+  while IFS=$'\t' read -r mode path; do
+    if [[ $mode == 160000* || $path != */* ]]; then
+      paths+=("$path")
+    else
+      paths+=("${path%/*}")
+    fi
+  done < <(tracked)
+  dots status --short --branch --untracked-files=normal -- "${paths[@]}"
+}
+
+edit() {
+  local query=() file
+  if [[ $# -gt 0 ]]; then query=(--query "$1"); fi
+  file=$(tracked | awk -F'\t' '$1 !~ /^160000/ { print $2 }' | fzy ${query[@]+"${query[@]}"}) || exit 0
+  exec ${EDITOR:-vi} "$HOME/$file"
+}
+
+case ${1-} in
+  "") overview ;;
+  edit) shift; edit "$@" ;;
+  *) dots "$@" ;;
+esac

@@ -23,7 +23,6 @@ if command -q gls
 else
     alias l "ls -la"
 end
-alias dg "command git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias show "defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide "defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 alias hidedesktop "defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
