@@ -45,3 +45,7 @@ if status is-interactive
     set hydro_color_git magenta
     set hydro_color_duration yellow
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+fish_add_path --path $BUN_INSTALL/bin
