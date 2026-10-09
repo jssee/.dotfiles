@@ -21,5 +21,3 @@ keybind = global:cmd+backquote=toggle_quick_terminal
 # custom-shader = shaders/crt.glsl
 # custom-shader = shaders/bloom.glsl
 # custom-shader = shaders/glitchy.glsl
-# custom-shader = shaders/dotmatrix.glsl
-# custom-shader = shaders/dotmatrix_glow.glsl
