@@ -4,6 +4,7 @@
 # config, the cd fires no hooks such as z or direnv.
 complete -c dots -f -a '(__dots_complete)'
 complete -c dots -n __fish_use_subcommand -a edit -d 'Edit a tracked file'
+complete -c dots -n __fish_use_subcommand -a ignore -d 'Hide untracked paths on this machine'
 
 function __dots_complete
     set -l before (string escape -- (commandline -xpc)[2..-1])

@@ -1,6 +1,7 @@
 # Ignores for the dotfiles repo only: `dots` lists untracked files beside tracked
 # ones, and these are owned by tools. Patterns are anchored to $HOME, so they
-# can never match inside another repo.
+# can never match inside another repo. Files only one machine has go in
+# ~/.dotfiles/info/exclude instead, via `dots ignore`.
 
 # fish: state, fisher plugins from fish_plugins, and tool-installed completions
 /.config/fish/fish_variables

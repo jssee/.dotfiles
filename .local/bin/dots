@@ -3,6 +3,7 @@
 #
 #   dots               overview: branch, changed files, and new files beside tracked ones
 #   dots edit [query]  pick a tracked file with fzy and open it in $EDITOR
+#   dots ignore PATH…  hide untracked paths from the overview on this machine
 #   dots <git args>    anything else runs as git on the dotfiles repo
 #
 # The repo is a bare git dir at ~/.dotfiles whose work tree is $HOME. Paths
@@ -38,8 +39,28 @@ edit() {
   exec ${EDITOR:-vi} "$HOME/$file"
 }
 
+# Tools install different files on each machine, so these ignores go in the
+# repo's info/exclude, which stays on this machine. Ignores that hold on every
+# machine belong in ~/.gitignore.
+ignore() {
+  if [[ $# -eq 0 ]]; then
+    echo "usage: dots ignore PATH..." >&2
+    exit 1
+  fi
+  local exclude="$HOME/.dotfiles/info/exclude" path pattern
+  mkdir -p "${exclude%/*}"
+  touch "$exclude"
+  for path in "$@"; do
+    # Anchor at ~ so the pattern matches only this path; accept absolute paths.
+    path=${path#"$HOME"/}
+    pattern="/${path#/}"
+    grep -qxF -- "$pattern" "$exclude" || echo "$pattern" >>"$exclude"
+  done
+}
+
 case ${1-} in
   "") overview ;;
   edit) shift; edit "$@" ;;
+  ignore) shift; ignore "$@" ;;
   *) dots "$@" ;;
 esac
