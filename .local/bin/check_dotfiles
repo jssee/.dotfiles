@@ -84,6 +84,7 @@ check_homebrew() {
     export LC_ALL=C
     brew bundle check --file="$brewfile" --verbose --no-upgrade 2>&1 | sed -n 's/^→ \(.*\)\.$/\1/p'
     entries() { sed -n "s/^$1 \"\([^\"]*\)\".*/\1/p" "$brewfile" | sort; }
+    comm -13 <(entries tap) <(brew tap | sort) | sed 's/^/not in Brewfile: tap /'
     comm -13 <(entries brew) <(brew leaves --installed-on-request | sort) | sed 's/^/not in Brewfile: formula /'
     comm -13 <(entries cask) <(brew list --cask --full-name | sort) | sed 's/^/not in Brewfile: cask /'
   )
