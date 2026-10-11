@@ -74,19 +74,18 @@ check_homebrew() {
   fi
 
   local brewfile="$HOME/.homebrew/Brewfile" drift=0 line
-  # brew and cask lines use full names for tap packages, as brew lists them.
-  # Extra formulae count only leaves installed on request, not dependencies.
+  # brew bundle resolves aliases and renamed casks, so it alone reports what
+  # the Brewfile is missing. Its cleanup would also list every dependency, so
+  # extras compare names by hand: formulae only as leaves installed on request.
   while IFS= read -r line; do
     warn "$line"
     drift=1
   done < <(
     export LC_ALL=C
-    brews() { sed -n 's/^brew "\([^"]*\)".*/\1/p' "$brewfile" | sort; }
-    casks() { sed -n 's/^cask "\([^"]*\)".*/\1/p' "$brewfile" | sort; }
-    comm -23 <(brews) <(brew list --formula --full-name | sort) | sed 's/^/not installed: formula /'
-    comm -23 <(casks) <(brew list --cask --full-name | sort) | sed 's/^/not installed: cask /'
-    comm -13 <(brews) <(brew leaves --installed-on-request | sort) | sed 's/^/not in Brewfile: formula /'
-    comm -13 <(casks) <(brew list --cask --full-name | sort) | sed 's/^/not in Brewfile: cask /'
+    brew bundle check --file="$brewfile" --verbose --no-upgrade 2>&1 | sed -n 's/^→ \(.*\)\.$/\1/p'
+    entries() { sed -n "s/^$1 \"\([^\"]*\)\".*/\1/p" "$brewfile" | sort; }
+    comm -13 <(entries brew) <(brew leaves --installed-on-request | sort) | sed 's/^/not in Brewfile: formula /'
+    comm -13 <(entries cask) <(brew list --cask --full-name | sort) | sed 's/^/not in Brewfile: cask /'
   )
   if [[ $drift -eq 0 ]]; then ok "installed packages match the Brewfile"; fi
 }
