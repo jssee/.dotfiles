@@ -22,7 +22,6 @@ brew "moreutils"
 brew "neovim"
 brew "nvie/tap/git-toolbelt"
 brew "openconnect"
-brew "postgresql@14", restart_service: :changed
 brew "renameutils"
 brew "ripgrep"
 brew "tree"
