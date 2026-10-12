@@ -42,6 +42,10 @@ if status is-interactive
         direnv hook fish | source
     end
 
+    if type -q zoxide
+        zoxide init fish | source
+    end
+
     set hydro_color_git magenta
     set hydro_color_duration yellow
 end

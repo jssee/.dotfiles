@@ -1,7 +1,7 @@
 # dots runs git from ~, so completions must resolve paths there too. Git's own
 # completions fall back to plain file completion, which only follows the
 # current directory, so run them from ~ in a fish with no config: without the
-# config, the cd fires no hooks such as z or direnv.
+# config, the cd fires no hooks such as zoxide or direnv.
 complete -c dots -f -a '(__dots_complete)'
 complete -c dots -n __fish_use_subcommand -a edit -d 'Edit a tracked file'
 complete -c dots -n __fish_use_subcommand -a ignore -d 'Hide untracked paths on this machine'

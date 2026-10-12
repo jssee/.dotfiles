@@ -25,6 +25,7 @@ brew "openconnect"
 brew "renameutils"
 brew "ripgrep"
 brew "tree"
+brew "zoxide"
 
 # apps
 cask "1password"
